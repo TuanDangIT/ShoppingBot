@@ -1,0 +1,2 @@
+# ShoppingBot
+Discord shopping bot
