@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Microsoft.Extensions.DependencyInjection;
+using ShoppingBot.Commands;
 
 namespace ShoppingBot
 {
@@ -36,6 +37,7 @@ namespace ShoppingBot
                 Services = _serviceProvider
             };
             _commands = _client.UseCommandsNext(commandsConfig);
+            RegisterCommands(_commands);
             await _client.ConnectAsync();
             await Task.Delay(-1);
         }
@@ -52,6 +54,10 @@ namespace ShoppingBot
                 AutoReconnect = true,
             };
             return new DiscordClient(discordConfiguration);
+        }
+        private static void RegisterCommands(CommandsNextExtension commands)
+        {
+            commands.RegisterCommands<TestCommands>();
         }
 
         private static Task OnClientReady(DiscordClient sender, DSharpPlus.EventArgs.ReadyEventArgs args)
