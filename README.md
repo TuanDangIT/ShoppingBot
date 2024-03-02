@@ -10,10 +10,10 @@
   <img src="/assets/shoppingbot.png"/>
 </p>
 <h2>Description</h2>
-<hr>
+
 <p>It's a bot meant for discord servers created with library - DSharpPlus. The main goal of the bot is to facilitate eCommerce processes by giving necessary tools from creating an order to handling it.</p>
 <h2>Features</h2>
-<hr>
+
 <h3>Seller</h3>
 <ul style="list-style: none">
     <li><input type="checkbox">Buy/Order a product</input></li>
@@ -33,5 +33,5 @@
     <li><input type="checkbox">AI integration (ChatGPT)</input></li>
 </ul>
 <h2>Get started</h2>
-<hr>
+
 <p>TBA</p>
