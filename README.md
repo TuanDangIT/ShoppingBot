@@ -2,10 +2,11 @@
 
 ---
 
-## ##Logos
+<h2>Logos</h2>
 
-![text](/assets/logo.png)
-
+<p align="center">
+  <img src="/assets/logo.png"/>
+</p>
 <p align="center">
   <img src="/assets/shoppingbot.png"/>
 </p>
