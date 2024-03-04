@@ -13,7 +13,7 @@ namespace ShoppingBot.DAL
     {
         public DbSet<User> Users { get; set; }
         public DbSet<Product> Products { get; set; }
-        public ShoppingBotDbContext(DbContextOptions options) : base(options)
+        public ShoppingBotDbContext(DbContextOptions<ShoppingBotDbContext> options) : base(options)
         {
             
         }
