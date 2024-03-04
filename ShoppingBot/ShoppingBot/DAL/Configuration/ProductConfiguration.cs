@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace ShoppingBot.DAL.Configuration
 {
-    internal class ProductConfiguration : IEntityTypeConfiguration<Product>
+    public class ProductConfiguration : IEntityTypeConfiguration<Product>
     {
         public void Configure(EntityTypeBuilder<Product> builder)
         {

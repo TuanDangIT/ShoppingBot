@@ -1,5 +1,7 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using ShoppingBot.DAL;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,6 +15,10 @@ namespace ShoppingBot
     {
         public static IServiceCollection AddApplication(this IServiceCollection services, IConfiguration configuration)
         {
+            services.AddDbContext<ShoppingBotDbContext>(options =>
+            {
+                options.UseNpgsql(configuration.GetConnectionString("Postgres"));
+            });
             services.AddSingleton<ShoppingBot>();
             services.AddMediatR(cfg =>
             {
