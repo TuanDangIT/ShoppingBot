@@ -13,7 +13,7 @@ namespace ShoppingBot.DAL.Configuration
     {
         public void Configure(EntityTypeBuilder<Product> builder)
         {
-            throw new NotImplementedException();
+            
         }
     }
 }
