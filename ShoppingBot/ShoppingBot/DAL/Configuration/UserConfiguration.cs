@@ -13,7 +13,9 @@ namespace ShoppingBot.DAL.Configuration
     {
         public void Configure(EntityTypeBuilder<User> builder)
         {
-            
+            builder.Property(x => x.Username)
+                .HasColumnType("varchar(20)")
+                .IsRequired();
         }
     }
 }

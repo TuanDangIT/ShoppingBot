@@ -13,7 +13,11 @@ namespace ShoppingBot.DAL.Configuration
     {
         public void Configure(EntityTypeBuilder<Product> builder)
         {
-            builder.   
+            builder.Property(x => x.Name)
+                .HasColumnType("varchar(20)")
+                .IsRequired();
+            builder.Property(x => x.Description)
+                .HasColumnType("varchar(200)");
         }
     }
 }
