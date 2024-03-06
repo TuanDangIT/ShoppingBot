@@ -2,6 +2,8 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using ShoppingBot.DAL;
+using ShoppingBot.DAL.Repositories;
+using ShoppingBot.DAL.Repositories.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,12 +21,24 @@ namespace ShoppingBot
             {
                 options.UseNpgsql(configuration.GetConnectionString("Postgres"));
             });
+            Migrate(services);
             services.AddSingleton<ShoppingBot>();
             services.AddMediatR(cfg =>
             {
                 cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly());
             });
+            services.AddScoped<IProductRepository, ProductRepository>();
             return services;
+        }
+        private static void Migrate(IServiceCollection services)
+        {
+            using var sp = services.BuildServiceProvider();
+            using var scope = sp.CreateScope();
+            var dbContext = sp.GetRequiredService<ShoppingBotDbContext>();
+            if(dbContext.Database.GetPendingMigrations().Any())
+            {
+                dbContext.Database.Migrate();
+            }
         }
     }
 }

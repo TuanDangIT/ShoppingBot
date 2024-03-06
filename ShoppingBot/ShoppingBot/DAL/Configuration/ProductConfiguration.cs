@@ -16,6 +16,8 @@ namespace ShoppingBot.DAL.Configuration
             builder.Property(x => x.Name)
                 .HasColumnType("varchar(20)")
                 .IsRequired();
+            builder.HasIndex(x => x.Name)
+                .IsUnique();
             builder.Property(x => x.Description)
                 .HasColumnType("varchar(200)");
         }

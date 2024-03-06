@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Microsoft.Extensions.DependencyInjection;
 using ShoppingBot.Commands;
+using DSharpPlus.SlashCommands;
 
 namespace ShoppingBot
 {
@@ -16,6 +17,7 @@ namespace ShoppingBot
         private readonly IServiceProvider _serviceProvider;
         private DiscordClient _client { get; set; } = default!;
         private CommandsNextExtension _commands { get; set; } = default!;
+        private SlashCommandsExtension _slashCommands { get; set; } = default!;
         private Config _config { get; set; } = default!;
         public ShoppingBot(IServiceProvider serviceProvider)
         {
@@ -37,7 +39,9 @@ namespace ShoppingBot
                 Services = _serviceProvider
             };
             _commands = _client.UseCommandsNext(commandsConfig);
+            _slashCommands = _client.UseSlashCommands();
             RegisterCommands(_commands);
+            RegisterSlashCommands(_slashCommands);
             await _client.ConnectAsync();
             await Task.Delay(-1);
         }
@@ -58,6 +62,10 @@ namespace ShoppingBot
         private static void RegisterCommands(CommandsNextExtension commands)
         {
             commands.RegisterCommands<TestCommands>();
+        }
+        private static void RegisterSlashCommands(SlashCommandsExtension slashCommands)
+        {
+            slashCommands.RegisterCommands<TestSlashCommands>();
         }
 
         private static Task OnClientReady(DiscordClient sender, DSharpPlus.EventArgs.ReadyEventArgs args)
