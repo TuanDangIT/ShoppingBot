@@ -29,5 +29,9 @@
 	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	  </None>
 	</ItemGroup>
+	<ItemGroup>
+	  <Folder Include="Features\Product\" />
+	  <Folder Include="Features\Profile\" />
+	</ItemGroup>
 
 </Project>

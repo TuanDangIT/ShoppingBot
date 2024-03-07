@@ -11,7 +11,7 @@ namespace ShoppingBot.DAL.Repositories.Interfaces
     {
         Task<IEnumerable<Product>>GetAll();
         Task<Product>GetByName(string name);
-        Task EditByName(string name);
+        Task EditByName(string name, Product product);
         Task DeleteByName(string name);
         Task CreateProduct(Product product);
     }

@@ -1,4 +1,5 @@
-﻿using ShoppingBot.DAL.Repositories.Interfaces;
+﻿using Microsoft.EntityFrameworkCore;
+using ShoppingBot.DAL.Repositories.Interfaces;
 using ShoppingBot.Entities;
 using System;
 using System.Collections.Generic;
@@ -16,29 +17,32 @@ namespace ShoppingBot.DAL.Repositories
         {
             _dbContext = dbContext;
         }
-        public Task CreateProduct(Product product)
+        public async Task CreateProduct(Product product)
         {
-            throw new NotImplementedException();
+            await _dbContext.Products.AddAsync(product);
+            await _dbContext.SaveChangesAsync();
         }
 
-        public Task DeleteByName(string name)
+        public async Task DeleteByName(string name)
         {
-            throw new NotImplementedException();
+            var productToDelete = await GetByName(name);
+            _dbContext.Remove(productToDelete);
+            await _dbContext.SaveChangesAsync();
         }
 
-        public Task EditByName(string name)
+        public async Task EditByName(string name, Product product)
         {
-            throw new NotImplementedException();
+            var productToEdit = await GetByName(name);
+            product.Name = productToEdit.Name;
+            product.Description = productToEdit.Description;
+            await _dbContext.SaveChangesAsync();
         }
 
-        public Task<IEnumerable<Product>> GetAll()
+        public async Task<IEnumerable<Product>> GetAll()
         {
-            throw new NotImplementedException();
+            return await _dbContext.Products.ToListAsync();
         }
 
-        public Task<Product> GetByName(string name)
-        {
-            throw new NotImplementedException();
-        }
+        public Task<Product> GetByName(string name) => _dbContext.Products.FirstAsync(x => x.Name == name);
     }
 }
