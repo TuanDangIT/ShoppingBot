@@ -7,7 +7,10 @@ using System.Threading.Tasks;
 
 namespace ShoppingBot.Shared.Abstractions
 {
-    internal interface ICommand
+    internal interface ICommand : IRequest<Result>
+    {
+    }
+    internal interface ICommand<TResponse> : IRequest<Result<TResponse>>
     {
     }
 }

@@ -25,14 +25,14 @@ namespace ShoppingBot.DAL.Repositories
 
         public async Task DeleteByNameAsync(string name)
         {
-            var productToDelete = await GetByName(name);
+            var productToDelete = await GetByNameAsync(name);
             _dbContext.Remove(productToDelete);
             await _dbContext.SaveChangesAsync();
         }
 
         public async Task EditByNameAsync(string name, Product product)
         {
-            var productToEdit = await GetByName(name);
+            var productToEdit = await GetByNameAsync(name);
             product.Name = productToEdit.Name;
             product.Description = productToEdit.Description;
             await _dbContext.SaveChangesAsync();
