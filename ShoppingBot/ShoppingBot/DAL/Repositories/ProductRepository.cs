@@ -17,20 +17,20 @@ namespace ShoppingBot.DAL.Repositories
         {
             _dbContext = dbContext;
         }
-        public async Task CreateProduct(Product product)
+        public async Task CreateProductAsync(Product product)
         {
             await _dbContext.Products.AddAsync(product);
             await _dbContext.SaveChangesAsync();
         }
 
-        public async Task DeleteByName(string name)
+        public async Task DeleteByNameAsync(string name)
         {
             var productToDelete = await GetByName(name);
             _dbContext.Remove(productToDelete);
             await _dbContext.SaveChangesAsync();
         }
 
-        public async Task EditByName(string name, Product product)
+        public async Task EditByNameAsync(string name, Product product)
         {
             var productToEdit = await GetByName(name);
             product.Name = productToEdit.Name;
@@ -38,11 +38,11 @@ namespace ShoppingBot.DAL.Repositories
             await _dbContext.SaveChangesAsync();
         }
 
-        public async Task<IEnumerable<Product>> GetAll()
+        public async Task<IEnumerable<Product>> GetAllAsync()
         {
             return await _dbContext.Products.ToListAsync();
         }
 
-        public Task<Product> GetByName(string name) => _dbContext.Products.FirstAsync(x => x.Name == name);
+        public Task<Product> GetByNameAsync(string name) => _dbContext.Products.FirstAsync(x => x.Name == name);
     }
 }
