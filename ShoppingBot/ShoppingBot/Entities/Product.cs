@@ -12,7 +12,7 @@ namespace ShoppingBot.Entities
         public string Name { get; set; } = default!;
         public double Price { get; set; }
         public string Description { get; set; } = default!;
-        public string ImageUrl { get; set; } = default!;
+        public string? ImageUrl { get; set; }
         public DateTime CreatedAt { get; set; }
         public DateTime LastUpdatedAt { get; set;}
     }

@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using ShoppingBot.Shared.Abstractions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,5 +8,5 @@ using System.Threading.Tasks;
 
 namespace ShoppingBot.Features.Product.AddProduct
 {
-    internal record class AddProductCommand(string Name, string Price, string Description, string ImageUrl) : IRequest;
+    internal record class AddProductCommand(string Name, double Price, string Description, string ImageUrl) : ICommand;
 }
