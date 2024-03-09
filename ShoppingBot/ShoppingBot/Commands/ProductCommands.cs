@@ -12,6 +12,7 @@ using System.Threading.Tasks;
 
 namespace ShoppingBot.Commands
 {
+    [SlashCommandGroup("product", "product features")]
     internal class ProductCommands : ApplicationCommandModule
     {
         private readonly IMediator _mediator;
