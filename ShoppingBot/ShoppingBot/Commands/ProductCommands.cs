@@ -25,8 +25,8 @@ namespace ShoppingBot.Commands
             _mediator = mediator;
         }
         [SlashCommand("add_product", "add product")]
-        public async Task TestSlashCommand(InteractionContext ctx, [Option("Nazwa produktu", "")] string Name, [Option("Cena produktu", "")] double Price,
-            [Option("Opis produktu", "")] string Description, [Option("ImageUrl produktu", "")] string ImageUrl)
+        public async Task AddProduct(InteractionContext ctx, [Option("n", "n")] string Name, [Option("p", "p")] double Price,
+            [Option("d", "d")] string Description, [Option("i", "i")] string ImageUrl)
         {
             await ctx.DeferAsync();
             var result = await _mediator.Send(new AddProductCommand(Name, Price, Description, ImageUrl));
