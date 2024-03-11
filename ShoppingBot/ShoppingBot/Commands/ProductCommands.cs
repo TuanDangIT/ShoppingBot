@@ -15,7 +15,7 @@ namespace ShoppingBot.Commands
 {
     [SlashRequireOwner]
     [SlashRequireUserPermissions(DSharpPlus.Permissions.Administrator)]
-    [SlashCommandGroup("product", "product features")]
+    //[SlashCommandGroup("product", "product features")]
     internal class ProductCommands : ApplicationCommandModule
     {
         private readonly IMediator _mediator;
