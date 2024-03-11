@@ -1,6 +1,7 @@
 ﻿using DSharpPlus.CommandsNext;
 using DSharpPlus.Entities;
 using DSharpPlus.SlashCommands;
+using DSharpPlus.SlashCommands.Attributes;
 using MediatR;
 using ShoppingBot.DAL.Repositories;
 using ShoppingBot.Features.Product.AddProduct;
@@ -12,6 +13,8 @@ using System.Threading.Tasks;
 
 namespace ShoppingBot.Commands
 {
+    [SlashRequireOwner]
+    [SlashRequireUserPermissions(DSharpPlus.Permissions.Administrator)]
     [SlashCommandGroup("product", "product features")]
     internal class ProductCommands : ApplicationCommandModule
     {
