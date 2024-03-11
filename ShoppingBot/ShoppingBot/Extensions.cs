@@ -34,13 +34,13 @@ namespace ShoppingBot
         }
         private static void Migrate(IServiceCollection services)
         {
-            //using var sp = services.BuildServiceProvider();
-            //using var scope = sp.CreateScope();
-            //var dbContext = sp.GetRequiredService<ShoppingBotDbContext>();
-            //if(dbContext.Database.GetPendingMigrations().Any())
-            //{
-            //    dbContext.Database.Migrate();
-            //}
+            using var sp = services.BuildServiceProvider();
+            using var scope = sp.CreateScope();
+            var dbContext = sp.GetRequiredService<ShoppingBotDbContext>();
+            if (dbContext.Database.GetPendingMigrations().Any())
+            {
+                dbContext.Database.Migrate();
+            }
         }
     }
 }

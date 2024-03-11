@@ -66,7 +66,6 @@ namespace ShoppingBot
         private static void RegisterSlashCommands(SlashCommandsExtension slashCommands)
         {
             slashCommands.RegisterCommands<TestSlashCommands>();
-            slashCommands.RegisterCommands<ProductCommands>();
         }
 
         private static Task OnClientReady(DiscordClient sender, DSharpPlus.EventArgs.ReadyEventArgs args)
