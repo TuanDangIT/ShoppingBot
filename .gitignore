@@ -397,5 +397,6 @@ FodyWeavers.xsd
 # JetBrains Rider
 *.sln.iml
 
+ShoppingBot/ShoppingBot/config.json
 /ShoppingBot/ShoppingBot/config.json
 config
