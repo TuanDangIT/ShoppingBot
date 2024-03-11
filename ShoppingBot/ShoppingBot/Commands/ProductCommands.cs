@@ -15,7 +15,7 @@ namespace ShoppingBot.Commands
 {
     [SlashRequireOwner]
     [SlashRequireUserPermissions(DSharpPlus.Permissions.Administrator)]
-    //[SlashCommandGroup("product", "product features")]
+    [SlashCommandGroup("product", "product features")]
     internal class ProductCommands : ApplicationCommandModule
     {
         private readonly IMediator _mediator;
@@ -25,7 +25,8 @@ namespace ShoppingBot.Commands
             _mediator = mediator;
         }
         [SlashCommand("add_product", "add product")]
-        public async Task TestSlashCommand(InteractionContext ctx, string Name, double Price, string Description, string ImageUrl)
+        public async Task TestSlashCommand(InteractionContext ctx, [Option("Nazwa produktu", "")] string Name, [Option("Cena produktu", "")] double Price,
+            [Option("Opis produktu", "")] string Description, [Option("ImageUrl produktu", "")] string ImageUrl)
         {
             await ctx.DeferAsync();
             var result = await _mediator.Send(new AddProductCommand(Name, Price, Description, ImageUrl));

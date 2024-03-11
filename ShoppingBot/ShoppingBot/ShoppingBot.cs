@@ -42,6 +42,7 @@ namespace ShoppingBot
             _slashCommands = _client.UseSlashCommands();
             RegisterCommands(_commands);
             RegisterSlashCommands(_slashCommands);
+            _slashCommands.RegisterCommands<ProductCommands>();
             await _client.ConnectAsync();
             await Task.Delay(-1);
         }
@@ -66,7 +67,7 @@ namespace ShoppingBot
         private static void RegisterSlashCommands(SlashCommandsExtension slashCommands)
         {
             slashCommands.RegisterCommands<TestSlashCommands>();
-            slashCommands.RegisterCommands<ProductCommands>();
+            //slashCommands.RegisterCommands<ProductCommands>();
         }
 
         private static Task OnClientReady(DiscordClient sender, DSharpPlus.EventArgs.ReadyEventArgs args)
