@@ -38,8 +38,12 @@ namespace ShoppingBot
                 EnableDefaultHelp = false,
                 Services = _serviceProvider
             };
+            var slashCommandConfig = new SlashCommandsConfiguration()
+            {
+                Services = _serviceProvider,
+            };
             _commands = _client.UseCommandsNext(commandsConfig);
-            _slashCommands = _client.UseSlashCommands();
+            _slashCommands = _client.UseSlashCommands(slashCommandConfig);
             RegisterCommands(_commands);
             RegisterSlashCommands(_slashCommands);
             await _client.ConnectAsync();
