@@ -40,7 +40,9 @@ namespace ShoppingBot.DAL.Repositories
 
         public async Task<IEnumerable<Product>> GetAllAsync()
         {
-            return await _dbContext.Products.ToListAsync();
+            return await _dbContext.Products
+                .AsNoTracking()
+                .ToListAsync();
         }
 
         public Task<Product> GetByNameAsync(string name) => _dbContext.Products.FirstAsync(x => x.Name == name);
