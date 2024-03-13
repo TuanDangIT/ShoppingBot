@@ -32,7 +32,6 @@
 	  </None>
 	</ItemGroup>
 	<ItemGroup>
-	  <Folder Include="DTOs\" />
 	  <Folder Include="Features\Profile\" />
 	</ItemGroup>
 

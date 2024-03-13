@@ -1,4 +1,6 @@
-﻿using System;
+﻿using ShoppingBot.DTOs;
+using ShoppingBot.Shared.Abstractions;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,7 +8,5 @@ using System.Threading.Tasks;
 
 namespace ShoppingBot.Features.Product.GetProductByName
 {
-    internal class GetProductByNameQuery
-    {
-    }
+    internal record class GetProductByNameQuery : IQuery<ProductDto>;
 }
