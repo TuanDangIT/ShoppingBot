@@ -8,5 +8,5 @@ using System.Threading.Tasks;
 
 namespace ShoppingBot.Features.Product.GetProductByName
 {
-    internal record class GetProductByNameQuery : IQuery<ProductDto>;
+    internal record class GetProductByNameQuery(string Name) : IQuery<ProductDto>;
 }

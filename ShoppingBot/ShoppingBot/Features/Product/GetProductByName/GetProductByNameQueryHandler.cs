@@ -18,9 +18,10 @@ namespace ShoppingBot.Features.Product.GetProductByName
         {
             _productRepository = productRepository;
         }
-        public Task<Result<ProductDto>> Handle(GetProductByNameQuery request, CancellationToken cancellationToken)
+        public async Task<Result<ProductDto>> Handle(GetProductByNameQuery request, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            var result = await _productRepository.GetByNameAsync(request.Name);
+            return Result.Success(result.AsDto());
         }
     }
 }
