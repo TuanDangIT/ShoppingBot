@@ -30,6 +30,8 @@ namespace ShoppingBot
                 cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly());
             });
             services.AddScoped<IProductRepository, ProductRepository>();
+            services.AddHostedService<BotDisconnectHandler>();
+            services.AddHostedService<DatabaseInitializer>();
             return services;
         }
         private static void Migrate(IServiceCollection services)
