@@ -40,7 +40,7 @@ namespace ShoppingBot.Commands
                     .WithContent("Product successfully added!"));
         }
         [SlashCommand("get-first-product", "get first product")]
-        public async Task GetAllProducts(InteractionContext ctx)
+        public async Task GetFirstProduct(InteractionContext ctx)
         {
             var result = await _dbContext.Products.FirstOrDefaultAsync();
             if (result is null)
@@ -49,5 +49,20 @@ namespace ShoppingBot.Commands
                 new DSharpPlus.Entities.DiscordInteractionResponseBuilder()
                     .WithContent($"Product: {result.Name}, {result.Price}"));
         }
+        [SlashCommand("get-all-products", "get all products")]
+        public async Task GetAllProducts(InteractionContext ctx)
+        {
+            //uproszczona wersja na razie
+            var results = await _mediator.Send(new GetAllProductsQuery());
+            StringBuilder resultsStringBuilder = new StringBuilder();
+            foreach (var item in results.Value)
+            {
+                resultsStringBuilder.Append($"{item.Name}, {item.Price} \n");
+            }
+            await ctx.Interaction.CreateResponseAsync(DSharpPlus.InteractionResponseType.ChannelMessageWithSource,
+                new DSharpPlus.Entities.DiscordInteractionResponseBuilder()
+                    .WithContent(resultsStringBuilder.ToString()));
+        }
+
     }
 }
