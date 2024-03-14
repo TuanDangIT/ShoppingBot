@@ -49,6 +49,11 @@ namespace ShoppingBot
             await _client.ConnectAsync();
             await Task.Delay(-1);
         }
+        public async Task DisconnectBot()
+        {
+            await _client.DisconnectAsync();
+            _client.Dispose();
+        }
         private static async Task<DiscordClient> CreateClient()
         {
             using StreamReader streamReader = new StreamReader("config.json");
