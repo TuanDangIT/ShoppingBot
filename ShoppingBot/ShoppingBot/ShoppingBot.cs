@@ -49,7 +49,7 @@ namespace ShoppingBot
             await _client.ConnectAsync();
             await Task.Delay(-1);
         }
-        public async Task DisconnectBot()
+        public async Task DisconnectBotAsync()
         {
             await _client.DisconnectAsync();
             _client.Dispose();

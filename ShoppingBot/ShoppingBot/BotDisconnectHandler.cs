@@ -24,7 +24,7 @@ namespace ShoppingBot
         public async Task StopAsync(CancellationToken cancellationToken)
         {
             var bot = _serviceProvider.GetRequiredService<ShoppingBot>();
-            await bot.DisconnectBot();
+            await bot.DisconnectBotAsync();
         }
     }
 }
