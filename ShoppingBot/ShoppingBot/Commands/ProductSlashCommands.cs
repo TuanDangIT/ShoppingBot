@@ -1,4 +1,5 @@
-﻿using DSharpPlus.SlashCommands;
+﻿using DSharpPlus.Entities;
+using DSharpPlus.SlashCommands;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using ShoppingBot.DAL;
@@ -27,17 +28,26 @@ namespace ShoppingBot.Commands
         public async Task AddProduct(InteractionContext ctx, [Option("n", "n")]string name,
             [Option("p", "p")]double price, [Option("d", "d")] string description, [Option("i", "i")] string imageUrl)
         {
+            await ctx.DeferAsync();
             var result = await _mediator.Send(new AddProductCommand(name, price, description, imageUrl));
+            var outputEmbed = new DiscordEmbedBuilder();
             if (result.IsFailure)
             {
-                await ctx.Interaction.CreateResponseAsync(DSharpPlus.InteractionResponseType.ChannelMessageWithSource,
-                    new DSharpPlus.Entities.DiscordInteractionResponseBuilder()
-                        .WithContent("Operation failed"));
+                outputEmbed = new DiscordEmbedBuilder
+                {
+                    Color = DiscordColor.Red,
+                    Title = $"Product operation response",
+                    Description = $"Product operation failed!"
+                };
             }
 
-            await ctx.Interaction.CreateResponseAsync(DSharpPlus.InteractionResponseType.ChannelMessageWithSource,
-                new DSharpPlus.Entities.DiscordInteractionResponseBuilder()
-                    .WithContent("Product successfully added!"));
+            outputEmbed = new DiscordEmbedBuilder
+            {
+                Color = DiscordColor.Green,
+                Title = $"Product operation response",
+                Description = $"Product operation successed!"
+            };
+            await ctx.EditResponseAsync(new DiscordWebhookBuilder().AddEmbed(outputEmbed));
         }
         [SlashCommand("get-first-product", "get first product")]
         public async Task GetFirstProduct(InteractionContext ctx)
@@ -53,15 +63,20 @@ namespace ShoppingBot.Commands
         public async Task GetAllProducts(InteractionContext ctx)
         {
             //uproszczona wersja na razie
+            await ctx.DeferAsync();
             var results = await _mediator.Send(new GetAllProductsQuery());
             StringBuilder resultsStringBuilder = new StringBuilder();
             foreach (var item in results.Value)
             {
                 resultsStringBuilder.Append($"{item.Name}, {item.Price} \n");
             }
-            await ctx.Interaction.CreateResponseAsync(DSharpPlus.InteractionResponseType.ChannelMessageWithSource,
-                new DSharpPlus.Entities.DiscordInteractionResponseBuilder()
-                    .WithContent(resultsStringBuilder.ToString()));
+            var outputEmbed = new DiscordEmbedBuilder
+            {
+                Color = DiscordColor.Green,
+                Title = $"Product operation response",
+                Description = resultsStringBuilder.ToString()
+            };
+            await ctx.EditResponseAsync(new DiscordWebhookBuilder().AddEmbed(outputEmbed));
         }
 
     }
