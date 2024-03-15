@@ -4,7 +4,9 @@ using MediatR;
 using Microsoft.EntityFrameworkCore;
 using ShoppingBot.DAL;
 using ShoppingBot.Features.Product.AddProduct;
+using ShoppingBot.Features.Product.DeleteProductByName;
 using ShoppingBot.Features.Product.GetAllProducts;
+using ShoppingBot.Features.Product.GetProductByName;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -79,15 +81,48 @@ namespace ShoppingBot.Commands
             await ctx.EditResponseAsync(new DiscordWebhookBuilder().AddEmbed(outputEmbed));
         }
         [SlashCommand("delete-product", "delete product")]
-        public async Task DeleteProductByName(InteractionContext ctx)
+        public async Task DeleteProductByName(InteractionContext ctx,
+            [Option("n", "n")]string name)
         {
-
+           
+        }
+        [SlashCommand("edit-product-price", "edit product price")]
+        public async Task EditProductPriceByName(InteractionContext ctx)
+        {
 
         }
-        [SlashCommand("edit-product", "edit product")]
-        public async Task EditProductByName(InteractionContext ctx)
+        [SlashCommand("edit-product-description", "edit product description")]
+        public async Task EditProductDescriptionByName(InteractionContext ctx)
         {
 
-        } 
+        }
+        [SlashCommand("edit-product-imageurl", "edit product image url")]
+        public async Task EditProductImageUrlByName(InteractionContext ctx)
+        {
+
+        }
+        [SlashCommand("get-product-by-name", "gets a product by name")]
+        public async Task GetProductByName(InteractionContext ctx,
+            [Option("n", "n")] string name)
+        {
+            await ctx.DeferAsync();
+            var result = await _mediator.Send(new GetProductByNameQuery(name));
+            var outputEmbed = new DiscordEmbedBuilder();
+            if(result.IsSuccess && result.Value != null)
+            {
+                outputEmbed = new DiscordEmbedBuilder
+                {
+                    Color = DiscordColor.Green,
+                    Title = $"Product operation response",
+                    Description = $"{result.Value.Name}, {result.Value.Price}",
+                    
+                };
+                if(result.Value.ImageUrl != null && result.Value.ImageUrl.Contains("https"))
+                {
+                    outputEmbed.ImageUrl = result.Value.ImageUrl;
+                }
+            }
+            await ctx.EditResponseAsync(new DiscordWebhookBuilder().AddEmbed(outputEmbed));
+        }
     }
 }
