@@ -25,8 +25,8 @@ namespace ShoppingBot.Commands
             _dbContext = dbContext;
         }
         [SlashCommand("add-product", "add product")]
-        public async Task AddProduct(InteractionContext ctx, [Option("n", "n")]string name,
-            [Option("p", "p")]double price, [Option("d", "d")] string description, [Option("i", "i")] string imageUrl)
+        public async Task AddProduct(InteractionContext ctx, [Option("n", "n")] string name,
+            [Option("p", "p")] double price, [Option("d", "d")] string description, [Option("i", "i")] string imageUrl)
         {
             await ctx.DeferAsync();
             var result = await _mediator.Send(new AddProductCommand(name, price, description, imageUrl));
@@ -78,6 +78,16 @@ namespace ShoppingBot.Commands
             };
             await ctx.EditResponseAsync(new DiscordWebhookBuilder().AddEmbed(outputEmbed));
         }
+        [SlashCommand("delete-product", "delete product")]
+        public async Task DeleteProductByName(InteractionContext ctx)
+        {
 
+
+        }
+        [SlashCommand("edit-product", "edit product")]
+        public async Task EditProductByName(InteractionContext ctx)
+        {
+
+        } 
     }
 }
