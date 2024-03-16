@@ -5,6 +5,9 @@ using Microsoft.EntityFrameworkCore;
 using ShoppingBot.DAL;
 using ShoppingBot.Features.Product.AddProduct;
 using ShoppingBot.Features.Product.DeleteProductByName;
+using ShoppingBot.Features.Product.EditProductDescriptionByName;
+using ShoppingBot.Features.Product.EditProductImageUrlByName;
+using ShoppingBot.Features.Product.EditProductPriceByName;
 using ShoppingBot.Features.Product.GetAllProducts;
 using ShoppingBot.Features.Product.GetProductByName;
 using System;
@@ -112,19 +115,85 @@ namespace ShoppingBot.Commands
             await ctx.EditResponseAsync(new DiscordWebhookBuilder().AddEmbed(outputEmbed));
         }
         [SlashCommand("edit-product-price", "edit product price")]
-        public async Task EditProductPriceByName(InteractionContext ctx)
+        public async Task EditProductPriceByName(InteractionContext ctx, [Option("n", "n")] string name,
+            [Option("p", "p")] double price)
         {
-
+            await ctx.DeferAsync();
+            var outputEmbed = new DiscordEmbedBuilder();
+            var result = await _mediator.Send(new EditProductPriceByNameCommand(name, price));
+            if (result.IsFailure)
+            {
+                outputEmbed = new DiscordEmbedBuilder
+                {
+                    Color = DiscordColor.Green,
+                    Title = $"Product operation response",
+                    Description = "Product edit operation failed"
+                };
+            }
+            else
+            {
+                outputEmbed = new DiscordEmbedBuilder
+                {
+                    Color = DiscordColor.Green,
+                    Title = $"Product operation response",
+                    Description = "Product edit operation successed"
+                };
+            }
+            await ctx.EditResponseAsync(new DiscordWebhookBuilder().AddEmbed(outputEmbed));
         }
         [SlashCommand("edit-product-description", "edit product description")]
-        public async Task EditProductDescriptionByName(InteractionContext ctx)
+        public async Task EditProductDescriptionByName(InteractionContext ctx, [Option("n", "n")] string name
+            , [Option("p", "p")] string description)
         {
-
+            await ctx.DeferAsync();
+            var outputEmbed = new DiscordEmbedBuilder();
+            var result = await _mediator.Send(new EditProductDescriptionByNameCommand(name, description));
+            if (result.IsFailure)
+            {
+                outputEmbed = new DiscordEmbedBuilder
+                {
+                    Color = DiscordColor.Green,
+                    Title = $"Product operation response",
+                    Description = "Product edit operation failed"
+                };
+            }
+            else
+            {
+                outputEmbed = new DiscordEmbedBuilder
+                {
+                    Color = DiscordColor.Green,
+                    Title = $"Product operation response",
+                    Description = "Product edit operation successed"
+                };
+            }
+            await ctx.EditResponseAsync(new DiscordWebhookBuilder().AddEmbed(outputEmbed));
         }
         [SlashCommand("edit-product-imageurl", "edit product image url")]
-        public async Task EditProductImageUrlByName(InteractionContext ctx)
+        public async Task EditProductImageUrlByName(InteractionContext ctx, [Option("n", "n")] string name
+            , [Option("p", "p")] string imageUrl)
         {
-
+            await ctx.DeferAsync();
+            var outputEmbed = new DiscordEmbedBuilder();
+            var result = await _mediator.Send(new EditProductImageUrlByNameCommand(name, imageUrl));
+            if (result.IsFailure)
+            {
+                outputEmbed = new DiscordEmbedBuilder
+                {
+                    Color = DiscordColor.Green,
+                    Title = $"Product operation response",
+                    Description = "Product edit operation failed"
+                };
+            }
+            else
+            {
+                outputEmbed = new DiscordEmbedBuilder
+                {
+                    Color = DiscordColor.Green,
+                    Title = $"Product operation response",
+                    Description = "Product edit operation successed"
+                };
+            }
+            await ctx.EditResponseAsync(new DiscordWebhookBuilder().AddEmbed(outputEmbed));
         }
         [SlashCommand("get-product-by-name", "gets a product by name")]
         public async Task GetProductByName(InteractionContext ctx,
