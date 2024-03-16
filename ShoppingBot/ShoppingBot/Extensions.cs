@@ -23,7 +23,7 @@ namespace ShoppingBot
                 options.UseNpgsql(configuration.GetConnectionString("Postgres"));
                 //options.UseSqlServer(configuration.GetConnectionString("MSSQL")); 
             });
-            Migrate(services);
+            //Migrate(services);
             services.AddSingleton<ShoppingBot>();
             services.AddMediatR(cfg =>
             {
@@ -34,15 +34,15 @@ namespace ShoppingBot
             services.AddHostedService<DatabaseInitializer>();
             return services;
         }
-        private static void Migrate(IServiceCollection services)
-        {
-            using var sp = services.BuildServiceProvider();
-            using var scope = sp.CreateScope();
-            var dbContext = sp.GetRequiredService<ShoppingBotDbContext>();
-            if (dbContext.Database.GetPendingMigrations().Any())
-            {
-                dbContext.Database.Migrate();
-            }
-        }
+        //private static void Migrate(IServiceCollection services)
+        //{
+        //    using var sp = services.BuildServiceProvider();
+        //    using var scope = sp.CreateScope();
+        //    var dbContext = sp.GetRequiredService<ShoppingBotDbContext>();
+        //    if (dbContext.Database.GetPendingMigrations().Any())
+        //    {
+        //        dbContext.Database.Migrate();
+        //    }
+        //}
     }
 }

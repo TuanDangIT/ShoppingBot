@@ -8,7 +8,7 @@ using IHost host = CreateHostBuilder(args)
     .Build();
 var serviceProvider = host.Services.CreateScope().ServiceProvider;
 var bot = serviceProvider.GetRequiredService<ShoppingBot.ShoppingBot>();
-bot.RunAsync().Wait();
+bot.RunAsync(host).Wait();
 IHostBuilder CreateHostBuilder(string[] args)
 {
     return Host.CreateDefaultBuilder(args)

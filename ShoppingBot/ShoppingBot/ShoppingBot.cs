@@ -9,6 +9,7 @@ using Newtonsoft.Json;
 using Microsoft.Extensions.DependencyInjection;
 using ShoppingBot.Commands;
 using DSharpPlus.SlashCommands;
+using Microsoft.Extensions.Hosting;
 
 namespace ShoppingBot
 {
@@ -26,7 +27,7 @@ namespace ShoppingBot
             string json = streamReader.ReadToEnd();
             _config = JsonConvert.DeserializeObject<Config>(json)!;
         }
-        public async Task RunAsync()
+        public async Task RunAsync(IHost host)
         {
             _client = await CreateClient();
             _client.Ready += OnClientReady;
@@ -47,7 +48,8 @@ namespace ShoppingBot
             RegisterCommands(_commands);
             RegisterSlashCommands(_slashCommands);
             await _client.ConnectAsync();
-            await Task.Delay(-1);
+            await host.RunAsync();
+            //await Task.Delay(-1);
         }
         public async Task DisconnectBotAsync()
         {
