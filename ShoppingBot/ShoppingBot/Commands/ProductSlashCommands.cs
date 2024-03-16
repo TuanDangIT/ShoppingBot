@@ -42,13 +42,17 @@ namespace ShoppingBot.Commands
                     Description = $"Product operation failed!"
                 };
             }
-
-            outputEmbed = new DiscordEmbedBuilder
+            else
             {
-                Color = DiscordColor.Green,
-                Title = $"Product operation response",
-                Description = $"Product operation successed!"
-            };
+                outputEmbed = new DiscordEmbedBuilder
+                {
+                    Color = DiscordColor.Green,
+                    Title = $"Product operation response",
+                    Description = $"Product operation successed!"
+                };
+            }
+
+          
             await ctx.EditResponseAsync(new DiscordWebhookBuilder().AddEmbed(outputEmbed));
         }
         [SlashCommand("get-first-product", "get first product")]
@@ -84,7 +88,28 @@ namespace ShoppingBot.Commands
         public async Task DeleteProductByName(InteractionContext ctx,
             [Option("n", "n")]string name)
         {
-           
+            await ctx.DeferAsync();
+            var outputEmbed = new DiscordEmbedBuilder();
+            var result = await _mediator.Send(new DeleteProductByNameCommand(name));
+            if (result.IsFailure)
+            {
+                outputEmbed = new DiscordEmbedBuilder
+                {
+                    Color = DiscordColor.Green,
+                    Title = $"Product operation response",
+                    Description = "Product delete operation failed"
+                };
+            }
+            else
+            {
+                outputEmbed = new DiscordEmbedBuilder
+                {
+                    Color = DiscordColor.Green,
+                    Title = $"Product operation response",
+                    Description = "Product delete operation successed"
+                };
+            }
+            await ctx.EditResponseAsync(new DiscordWebhookBuilder().AddEmbed(outputEmbed));
         }
         [SlashCommand("edit-product-price", "edit product price")]
         public async Task EditProductPriceByName(InteractionContext ctx)
@@ -121,6 +146,16 @@ namespace ShoppingBot.Commands
                 {
                     outputEmbed.ImageUrl = result.Value.ImageUrl;
                 }
+            }
+            else
+            {
+                outputEmbed = new DiscordEmbedBuilder
+                {
+                    Color = DiscordColor.Red,
+                    Title = $"Product operation response",
+                    Description = $"Product not found",
+
+                };
             }
             await ctx.EditResponseAsync(new DiscordWebhookBuilder().AddEmbed(outputEmbed));
         }
