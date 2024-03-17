@@ -1,4 +1,5 @@
 ﻿using FluentValidation;
+using ShoppingBot.DAL;
 using System;
 using System.Collections.Generic;
 using System.Linq;
