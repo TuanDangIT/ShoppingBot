@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace ShoppingBot.Shared.Errors
 {
-    internal class ProductErrors
+    internal static class ProductErrors
     {
+        public static readonly Error ValidationError = new Error("product-validation-error", "product validation failed");
     }
 }
