@@ -25,7 +25,7 @@ namespace ShoppingBot.Features.Product.EditProductPriceByName
         public async Task<Result> Handle(EditProductPriceByNameCommand request, CancellationToken cancellationToken)
         {
             var validationResult = await _validator.ValidateAsync(request, cancellationToken);
-            if(validationResult.IsValid)
+            if (validationResult.IsValid)
             {
                 await _productRepository.EditProductPriceByNameAsync(request.Name, request.Price);
                 return Result.Success();

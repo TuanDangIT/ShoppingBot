@@ -12,6 +12,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore.SqlServer;
 using FluentValidation;
+using ShoppingBot.Features.Product.EditProductPriceByName;
 
 namespace ShoppingBot
 {
@@ -30,7 +31,8 @@ namespace ShoppingBot
             {
                 cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly());
             });
-            services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
+            //services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
+            services.AddScoped<IValidator<EditProductPriceByNameCommand>, EditProductPriceByNameCommandValidator>();
             services.AddScoped<IProductRepository, ProductRepository>();
             services.AddHostedService<BotDisconnectHandler>();
             services.AddHostedService<DatabaseInitializer>();
