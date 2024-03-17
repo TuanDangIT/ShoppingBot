@@ -2,6 +2,7 @@
 using ShoppingBot.DAL.Repositories.Interfaces;
 using ShoppingBot.Shared;
 using ShoppingBot.Shared.Abstractions;
+using ShoppingBot.Shared.Errors;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -29,7 +30,7 @@ namespace ShoppingBot.Features.Product.EditProductPriceByName
                 await _productRepository.EditProductPriceByNameAsync(request.Name, request.Price);
                 return Result.Success();
             }
-            return Result.Failure();
+            return Result.Failure(ProductErrors.ValidationError);
         }
     }
 }
