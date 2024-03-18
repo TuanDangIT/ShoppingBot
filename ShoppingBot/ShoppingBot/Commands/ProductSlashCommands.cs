@@ -22,12 +22,10 @@ namespace ShoppingBot.Commands
     internal class ProductSlashCommands : ApplicationCommandModule
     {
         private readonly IMediator _mediator;
-        private readonly ShoppingBotDbContext _dbContext;
 
-        public ProductSlashCommands(IMediator mediator, ShoppingBotDbContext dbContext)
+        public ProductSlashCommands(IMediator mediator)
         {
             _mediator = mediator;
-            _dbContext = dbContext;
         }
         [SlashCommand("add-product", "Add a product")]
         public async Task AddProduct(InteractionContext ctx, [Option("name", "Item name")] string name,
