@@ -18,7 +18,7 @@ using System.Threading.Tasks;
 
 namespace ShoppingBot.Commands
 {
-    [SlashCommandGroup("product", "product operations")]
+    [SlashCommandGroup("product", "Product operations")]
     internal class ProductSlashCommands : ApplicationCommandModule
     {
         private readonly IMediator _mediator;
@@ -29,9 +29,9 @@ namespace ShoppingBot.Commands
             _mediator = mediator;
             _dbContext = dbContext;
         }
-        [SlashCommand("add-product", "add product")]
-        public async Task AddProduct(InteractionContext ctx, [Option("n", "n")] string name,
-            [Option("p", "p")] double price, [Option("d", "d")] string description, [Option("i", "i")] string imageUrl)
+        [SlashCommand("add-product", "Add a product")]
+        public async Task AddProduct(InteractionContext ctx, [Option("name", "Item name")] string name,
+            [Option("price", "Item price")] double price, [Option("description", "Item description")] string description, [Option("image-url", "Url link to the image")] string imageUrl)
         {
             await ctx.DeferAsync();
             var result = await _mediator.Send(new AddProductCommand(name, price, description, imageUrl));
@@ -58,17 +58,7 @@ namespace ShoppingBot.Commands
           
             await ctx.EditResponseAsync(new DiscordWebhookBuilder().AddEmbed(outputEmbed));
         }
-        [SlashCommand("get-first-product", "get first product")]
-        public async Task GetFirstProduct(InteractionContext ctx)
-        {
-            var result = await _dbContext.Products.FirstOrDefaultAsync();
-            if (result is null)
-                return;
-            await ctx.Interaction.CreateResponseAsync(DSharpPlus.InteractionResponseType.ChannelMessageWithSource,
-                new DSharpPlus.Entities.DiscordInteractionResponseBuilder()
-                    .WithContent($"Product: {result.Name}, {result.Price}"));
-        }
-        [SlashCommand("get-all-products", "get all products")]
+        [SlashCommand("get-all-products", "Get all products")]
         public async Task GetAllProducts(InteractionContext ctx)
         {
             //uproszczona wersja na razie
@@ -87,9 +77,9 @@ namespace ShoppingBot.Commands
             };
             await ctx.EditResponseAsync(new DiscordWebhookBuilder().AddEmbed(outputEmbed));
         }
-        [SlashCommand("delete-product", "delete product")]
+        [SlashCommand("delete-product", "Delete a product")]
         public async Task DeleteProductByName(InteractionContext ctx,
-            [Option("n", "n")]string name)
+            [Option("name", "Item name")]string name)
         {
             await ctx.DeferAsync();
             var outputEmbed = new DiscordEmbedBuilder();
@@ -114,9 +104,9 @@ namespace ShoppingBot.Commands
             }
             await ctx.EditResponseAsync(new DiscordWebhookBuilder().AddEmbed(outputEmbed));
         }
-        [SlashCommand("edit-product-price", "edit product price")]
-        public async Task EditProductPriceByName(InteractionContext ctx, [Option("n", "n")] string name,
-            [Option("p", "p")] double price)
+        [SlashCommand("edit-product-price", "Edit a product's price")]
+        public async Task EditProductPriceByName(InteractionContext ctx, [Option("name", "Item name")] string name,
+            [Option("price", "Item price")] double price)
         {
             await ctx.DeferAsync();
             var outputEmbed = new DiscordEmbedBuilder();
@@ -141,9 +131,9 @@ namespace ShoppingBot.Commands
             }
             await ctx.EditResponseAsync(new DiscordWebhookBuilder().AddEmbed(outputEmbed));
         }
-        [SlashCommand("edit-product-description", "edit product description")]
-        public async Task EditProductDescriptionByName(InteractionContext ctx, [Option("n", "n")] string name
-            , [Option("p", "p")] string description)
+        [SlashCommand("edit-product-description", "Edit a product's description")]
+        public async Task EditProductDescriptionByName(InteractionContext ctx, [Option("name", "Item name")] string name
+            , [Option("description", "Item description")] string description)
         {
             await ctx.DeferAsync();
             var outputEmbed = new DiscordEmbedBuilder();
@@ -168,9 +158,9 @@ namespace ShoppingBot.Commands
             }
             await ctx.EditResponseAsync(new DiscordWebhookBuilder().AddEmbed(outputEmbed));
         }
-        [SlashCommand("edit-product-imageurl", "edit product image url")]
-        public async Task EditProductImageUrlByName(InteractionContext ctx, [Option("n", "n")] string name
-            , [Option("p", "p")] string imageUrl)
+        [SlashCommand("edit-product-imageurl", "Edit a product's image URL")]
+        public async Task EditProductImageUrlByName(InteractionContext ctx, [Option("name", "Item name")] string name
+            , [Option("image-url", "Url link to the image")] string imageUrl)
         {
             await ctx.DeferAsync();
             var outputEmbed = new DiscordEmbedBuilder();
@@ -195,9 +185,9 @@ namespace ShoppingBot.Commands
             }
             await ctx.EditResponseAsync(new DiscordWebhookBuilder().AddEmbed(outputEmbed));
         }
-        [SlashCommand("get-product-by-name", "gets a product by name")]
+        [SlashCommand("get-product-by-name", "Get a product by name")]
         public async Task GetProductByName(InteractionContext ctx,
-            [Option("n", "n")] string name)
+            [Option("name", "Item name")] string name)
         {
             await ctx.DeferAsync();
             var result = await _mediator.Send(new GetProductByNameQuery(name));
