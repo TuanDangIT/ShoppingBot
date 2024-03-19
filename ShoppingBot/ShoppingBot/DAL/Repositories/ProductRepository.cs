@@ -30,22 +30,19 @@ namespace ShoppingBot.DAL.Repositories
             await _dbContext.SaveChangesAsync();
         }
 
-        public async Task EditProductPriceByNameAsync(string name, double price)
+        public async Task EditProductPriceByNameAsync(Product product, double price)
         {
-            var productToEdit = await GetByNameAsync(name);
-            productToEdit.Price = price;
+            product.Price = price;
             await _dbContext.SaveChangesAsync();
         }
-        public async Task EditProductDescriptionByNameAsync(string name, string description)
+        public async Task EditProductDescriptionByNameAsync(Product product, string description)
         {
-            var productToEdit = await GetByNameAsync(name);
-            productToEdit.Description = description;
+            product.Description = description;
             await _dbContext.SaveChangesAsync();
         }
-        public async Task EditProductImageUrlByNameAsync(string name, string imageUrl)
+        public async Task EditProductImageUrlByNameAsync(Product product, string imageUrl)
         {
-            var productToEdit = await GetByNameAsync(name);
-            productToEdit.ImageUrl = imageUrl;
+            product.ImageUrl = imageUrl;
             await _dbContext.SaveChangesAsync();
         }
 
