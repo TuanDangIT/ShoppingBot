@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Channels;
 using System.Threading.Tasks;
 
 namespace ShoppingBot.Features.Product.EditProductPriceByName
@@ -29,7 +30,11 @@ namespace ShoppingBot.Features.Product.EditProductPriceByName
             {
                 return Result.Failure(ProductErrors.NotFound);
             }
-            await _productRepository.EditProductPriceByNameAsync(product, request.Price);
+            var changes = await _productRepository.EditProductPriceByNameAsync(product, request.Price);
+            if (changes is 0)
+            {
+                return Result.Failure(ProductErrors.NotUpdated);
+            }
             return Result.Success();
         }
     }

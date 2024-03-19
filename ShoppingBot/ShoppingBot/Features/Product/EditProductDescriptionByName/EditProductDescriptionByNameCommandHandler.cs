@@ -26,7 +26,11 @@ namespace ShoppingBot.Features.Product.EditProductDescriptionByName
             {
                 return Result.Failure(ProductErrors.NotFound);
             }
-            await _productRepository.EditProductDescriptionByNameAsync(product, request.Description);
+            var changes = await _productRepository.EditProductDescriptionByNameAsync(product, request.Description);
+            if(changes is 0)
+            {
+                return Result.Failure(ProductErrors.NotUpdated);
+            }
             return Result.Success();
         }
     }

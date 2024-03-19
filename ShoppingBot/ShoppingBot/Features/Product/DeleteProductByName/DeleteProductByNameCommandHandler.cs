@@ -1,6 +1,7 @@
 ﻿using ShoppingBot.DAL.Repositories.Interfaces;
 using ShoppingBot.Shared;
 using ShoppingBot.Shared.Abstractions;
+using ShoppingBot.Shared.Errors;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,7 +20,11 @@ namespace ShoppingBot.Features.Product.DeleteProductByName
         }
         public async Task<Result> Handle(DeleteProductByNameCommand request, CancellationToken cancellationToken)
         {
-            await _productRepository.DeleteByNameAsync(request.Name);
+            var changes = await _productRepository.DeleteByNameAsync(request.Name);
+            if(changes is 0)
+            {
+                return Result.Failure(ProductErrors.NotDeleted);
+            }
             return Result.Success();
         }
     }
