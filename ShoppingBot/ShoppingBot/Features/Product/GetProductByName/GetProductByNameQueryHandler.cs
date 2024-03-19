@@ -2,6 +2,7 @@
 using ShoppingBot.DTOs;
 using ShoppingBot.Shared;
 using ShoppingBot.Shared.Abstractions;
+using ShoppingBot.Shared.Errors;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,6 +22,10 @@ namespace ShoppingBot.Features.Product.GetProductByName
         public async Task<Result<ProductDto>> Handle(GetProductByNameQuery request, CancellationToken cancellationToken)
         {
             var result = await _productRepository.GetByNameAsync(request.Name);
+            if (result == null)
+            {
+                return Result.Failure<ProductDto>(ProductErrors.NotFound);
+            }
             return Result.Success(result.AsDto());
         }
     }

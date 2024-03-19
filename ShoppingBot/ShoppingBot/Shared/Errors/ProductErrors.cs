@@ -8,6 +8,7 @@ namespace ShoppingBot.Shared.Errors
 {
     internal static class ProductErrors
     {
-        public static readonly Error ValidationError = new Error("product-validation-error", "product validation failed");
+        public static readonly Error ValidationError = new Error("product-validation-error", "Product validation failed");
+        public static readonly Error NotFound = new Error("product-not-found", "Product not found");
     }
 }
