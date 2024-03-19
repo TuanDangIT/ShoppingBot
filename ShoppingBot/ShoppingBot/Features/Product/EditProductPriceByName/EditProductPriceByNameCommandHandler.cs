@@ -24,13 +24,13 @@ namespace ShoppingBot.Features.Product.EditProductPriceByName
         }
         public async Task<Result> Handle(EditProductPriceByNameCommand request, CancellationToken cancellationToken)
         {
-            var validationResult = await _validator.ValidateAsync(request, cancellationToken);
-            if (validationResult.IsValid)
+            var product = await _productRepository.GetByNameAsync(request.Name);
+            if (product == null)
             {
-                await _productRepository.EditProductPriceByNameAsync(request.Name, request.Price);
-                return Result.Success();
+                return Result.Failure(ProductErrors.NotFound);
             }
-            return Result.Failure(ProductErrors.ValidationError);
+            await _productRepository.EditProductPriceByNameAsync(product, request.Price);
+            return Result.Success();
         }
     }
 }

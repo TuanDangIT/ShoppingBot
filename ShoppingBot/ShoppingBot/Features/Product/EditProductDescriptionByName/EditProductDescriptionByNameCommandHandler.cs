@@ -1,6 +1,7 @@
 ﻿using ShoppingBot.DAL.Repositories.Interfaces;
 using ShoppingBot.Shared;
 using ShoppingBot.Shared.Abstractions;
+using ShoppingBot.Shared.Errors;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
@@ -20,7 +21,12 @@ namespace ShoppingBot.Features.Product.EditProductDescriptionByName
         }
         public async Task<Result> Handle(EditProductDescriptionByNameCommand request, CancellationToken cancellationToken)
         {
-            await _productRepository.EditProductDescriptionByNameAsync(request.Name, request.Description);
+            var product = await _productRepository.GetByNameAsync(request.Name);
+            if(product == null)
+            {
+                return Result.Failure(ProductErrors.NotFound);
+            }
+            await _productRepository.EditProductDescriptionByNameAsync(product, request.Description);
             return Result.Success();
         }
     }

@@ -1,6 +1,7 @@
 ﻿using ShoppingBot.DAL.Repositories.Interfaces;
 using ShoppingBot.Shared;
 using ShoppingBot.Shared.Abstractions;
+using ShoppingBot.Shared.Errors;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,7 +20,12 @@ namespace ShoppingBot.Features.Product.EditProductImageUrlByName
         }
         public async Task<Result> Handle(EditProductImageUrlByNameCommand request, CancellationToken cancellationToken)
         {
-            await _productRepository.EditProductImageUrlByNameAsync(request.Name, request.ImageUrl);
+            var product = await _productRepository.GetByNameAsync(request.Name);
+            if (product == null)
+            {
+                return Result.Failure(ProductErrors.NotFound);
+            }
+            await _productRepository.EditProductImageUrlByNameAsync(product, request.ImageUrl);
             return Result.Success();
         }
     }
