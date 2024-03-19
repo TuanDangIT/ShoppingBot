@@ -17,33 +17,38 @@ namespace ShoppingBot.DAL.Repositories
         {
             _dbContext = dbContext;
         }
-        public async Task CreateProductAsync(Product product)
+        public async Task<int> CreateProductAsync(Product product)
         {
             await _dbContext.Products.AddAsync(product);
-            await _dbContext.SaveChangesAsync();
+            var changes = await _dbContext.SaveChangesAsync();
+            return changes;
         }
 
-        public async Task DeleteByNameAsync(string name)
+        public async Task<int> DeleteByNameAsync(string name)
         {
             var productToDelete = await GetByNameAsync(name);
             _dbContext.Remove(productToDelete);
-            await _dbContext.SaveChangesAsync();
+            var changes = await _dbContext.SaveChangesAsync();
+            return changes;
         }
 
-        public async Task EditProductPriceByNameAsync(Product product, double price)
+        public async Task<int> EditProductPriceByNameAsync(Product product, double price)
         {
             product.Price = price;
-            await _dbContext.SaveChangesAsync();
+            var changes = await _dbContext.SaveChangesAsync();
+            return changes;
         }
-        public async Task EditProductDescriptionByNameAsync(Product product, string description)
+        public async Task<int> EditProductDescriptionByNameAsync(Product product, string description)
         {
             product.Description = description;
-            await _dbContext.SaveChangesAsync();
+            var changes = await _dbContext.SaveChangesAsync();
+            return changes;
         }
-        public async Task EditProductImageUrlByNameAsync(Product product, string imageUrl)
+        public async Task<int> EditProductImageUrlByNameAsync(Product product, string imageUrl)
         {
             product.ImageUrl = imageUrl;
-            await _dbContext.SaveChangesAsync();
+            var changes = await _dbContext.SaveChangesAsync();
+            return changes;
         }
 
         public async Task<IEnumerable<Product>> GetAllAsync()

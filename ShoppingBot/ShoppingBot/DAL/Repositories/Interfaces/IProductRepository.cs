@@ -11,10 +11,10 @@ namespace ShoppingBot.DAL.Repositories.Interfaces
     {
         Task<IEnumerable<Product>>GetAllAsync();
         Task<Product>GetByNameAsync(string name);
-        Task EditProductPriceByNameAsync(Product product, double price);
-        Task EditProductDescriptionByNameAsync(Product product, string description);
-        Task EditProductImageUrlByNameAsync(Product product, string imageUrl);
-        Task DeleteByNameAsync(string name);
-        Task CreateProductAsync(Product product);
+        Task<int> EditProductPriceByNameAsync(Product product, double price);
+        Task<int> EditProductDescriptionByNameAsync(Product product, string description);
+        Task<int> EditProductImageUrlByNameAsync(Product product, string imageUrl);
+        Task<int> DeleteByNameAsync(string name);
+        Task<int> CreateProductAsync(Product product);
     }
 }
