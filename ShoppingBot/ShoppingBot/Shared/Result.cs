@@ -24,7 +24,7 @@ namespace ShoppingBot.Shared
         public static Result Success() => new Result(true, Error.None);
         public static Result Failure(Error error) => new Result(false, error);
         public static Result<T> Success<T>(T value) => new Result<T>(value, true, Error.None);
-        public static Result<T> Failure<T>(Error error) => new Result<T>(default!, true, error);
+        public static Result<T> Failure<T>(Error error) => new Result<T>(default!, false, error);
     }
     internal class Result<T> : Result
     {
