@@ -24,10 +24,9 @@ namespace ShoppingBot.DAL.Repositories
             return changes;
         }
 
-        public async Task<int> DeleteByNameAsync(string name)
+        public async Task<int> DeleteByNameAsync(Product product)
         {
-            var productToDelete = await GetByNameAsync(name);
-            _dbContext.Remove(productToDelete);
+            _dbContext.Remove(product);
             var changes = await _dbContext.SaveChangesAsync();
             return changes;
         }
@@ -58,6 +57,11 @@ namespace ShoppingBot.DAL.Repositories
                 .ToListAsync();
         }
 
-        public Task<Product> GetByNameAsync(string name) => _dbContext.Products.FirstAsync(x => x.Name == name);
+        public Task<Product?> GetByNameAsync(string name)
+        {
+            var product = _dbContext.Products.FirstOrDefault(x => x.Name == name);
+
+            return Task.FromResult(product);
+        }
     }
 }

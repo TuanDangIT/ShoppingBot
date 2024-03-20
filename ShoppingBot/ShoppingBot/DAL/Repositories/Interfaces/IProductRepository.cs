@@ -10,11 +10,11 @@ namespace ShoppingBot.DAL.Repositories.Interfaces
     internal interface IProductRepository
     {
         Task<IEnumerable<Product>>GetAllAsync();
-        Task<Product>GetByNameAsync(string name);
+        Task<Product?>GetByNameAsync(string name);
         Task<int> EditProductPriceByNameAsync(Product product, double price);
         Task<int> EditProductDescriptionByNameAsync(Product product, string description);
         Task<int> EditProductImageUrlByNameAsync(Product product, string imageUrl);
-        Task<int> DeleteByNameAsync(string name);
+        Task<int> DeleteByNameAsync(Product product);
         Task<int> CreateProductAsync(Product product);
     }
 }
