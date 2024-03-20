@@ -15,13 +15,10 @@ namespace ShoppingBot.Features.Product.EditProductPriceByName
     internal class EditProductPriceByNameCommandHandler : ICommandHandler<EditProductPriceByNameCommand>
     {
         private readonly IProductRepository _productRepository;
-        private readonly IValidator<EditProductPriceByNameCommand> _validator;
 
-        public EditProductPriceByNameCommandHandler(IProductRepository productRepository,
-            IValidator<EditProductPriceByNameCommand> validator)
+        public EditProductPriceByNameCommandHandler(IProductRepository productRepository)
         {
             _productRepository = productRepository;
-            _validator = validator;
         }
         public async Task<Result> Handle(EditProductPriceByNameCommand request, CancellationToken cancellationToken)
         {

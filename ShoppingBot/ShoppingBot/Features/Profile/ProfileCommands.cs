@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ShoppingBot.Commands
+namespace ShoppingBot.Features.Profile
 {
     internal class ProfileCommands : ApplicationCommandModule
     {

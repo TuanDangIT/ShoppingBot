@@ -7,9 +7,10 @@ using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Microsoft.Extensions.DependencyInjection;
-using ShoppingBot.Commands;
 using DSharpPlus.SlashCommands;
 using Microsoft.Extensions.Hosting;
+using ShoppingBot.Features.Product;
+using ShoppingBot.Commands;
 
 namespace ShoppingBot
 {

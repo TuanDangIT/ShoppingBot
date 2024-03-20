@@ -13,6 +13,7 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore.SqlServer;
 using FluentValidation;
 using ShoppingBot.Features.Product.EditProductPriceByName;
+using ShoppingBot.Shared;
 using ShoppingBot.Behaviors;
 
 namespace ShoppingBot
@@ -26,29 +27,17 @@ namespace ShoppingBot
                 options.UseNpgsql(configuration.GetConnectionString("Postgres"));
                 //options.UseSqlServer(configuration.GetConnectionString("MSSQL")); 
             });
-            //Migrate(services);
             services.AddSingleton<ShoppingBot>();
             services.AddMediatR(cfg =>
             {
                 cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly());
                 cfg.AddOpenBehavior(typeof(ValidationPipelineBehavior<,>));
             });
-            //services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
-            services.AddScoped<IValidator<EditProductPriceByNameCommand>, EditProductPriceByNameCommandValidator>();
+            services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
             services.AddScoped<IProductRepository, ProductRepository>();
             services.AddHostedService<BotDisconnectHandler>();
             services.AddHostedService<DatabaseInitializer>();
             return services;
         }
-        //private static void Migrate(IServiceCollection services)
-        //{
-        //    using var sp = services.BuildServiceProvider();
-        //    using var scope = sp.CreateScope();
-        //    var dbContext = sp.GetRequiredService<ShoppingBotDbContext>();
-        //    if (dbContext.Database.GetPendingMigrations().Any())
-        //    {
-        //        dbContext.Database.Migrate();
-        //    }
-        //}
     }
 }
