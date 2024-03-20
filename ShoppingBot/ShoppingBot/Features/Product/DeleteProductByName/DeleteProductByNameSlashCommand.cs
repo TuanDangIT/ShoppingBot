@@ -22,7 +22,7 @@ namespace ShoppingBot.Features.Product
             {
                 outputEmbed = new DiscordEmbedBuilder
                 {
-                    Color = DiscordColor.Green,
+                    Color = DiscordColor.Red,
                     Title = $"Product operation response",
                     Description = "Product delete operation failed"
                 };
