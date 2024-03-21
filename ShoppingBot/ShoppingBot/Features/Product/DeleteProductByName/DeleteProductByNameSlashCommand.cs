@@ -24,7 +24,11 @@ namespace ShoppingBot.Features.Product
                 {
                     Color = DiscordColor.Red,
                     Title = $"Product operation response",
-                    Description = "Product delete operation failed"
+                    Description = "Product delete operation failed",
+                    Footer = new DiscordEmbedBuilder.EmbedFooter()
+                    {
+                        Text = $"Additional information: \n{result.Error.Code}: {result.Error.Description}"
+                    }
                 };
             }
             else
