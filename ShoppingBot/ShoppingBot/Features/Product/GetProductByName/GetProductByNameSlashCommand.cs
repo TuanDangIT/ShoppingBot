@@ -1,5 +1,6 @@
 ﻿using DSharpPlus.Entities;
 using DSharpPlus.SlashCommands;
+using Newtonsoft.Json.Linq;
 using ShoppingBot.Features.Product.GetProductByName;
 using System;
 using System.Collections.Generic;
@@ -23,10 +24,10 @@ namespace ShoppingBot.Features.Product
                 outputEmbed = new DiscordEmbedBuilder
                 {
                     Color = DiscordColor.Green,
-                    Title = $"Product operation response",
-                    Description = $"{result.Value.Name}, {result.Value.Price}",
+                    Title = $"{result.Value.Name}",
+                    Description = $"{result.Value.Description}",
+                }.AddField(nameof(result.Value.Price), result.Value.Price.ToString("F"), true);
 
-                };
                 if (result.Value.ImageUrl != null && result.Value.ImageUrl.Contains("https"))
                 {
                     outputEmbed.ImageUrl = result.Value.ImageUrl;
