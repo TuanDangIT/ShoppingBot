@@ -27,7 +27,8 @@ namespace ShoppingBot.Features.Product
                     Description = "Product delete operation failed",
                     Footer = new DiscordEmbedBuilder.EmbedFooter()
                     {
-                        Text = $"Additional information: \n{result.Error.Code}: {result.Error.Description}"
+                        Text = $"Additional information: \n" +
+                        $"{result.Error.Code}: {result.Error.Description}"
                     }
                 };
             }

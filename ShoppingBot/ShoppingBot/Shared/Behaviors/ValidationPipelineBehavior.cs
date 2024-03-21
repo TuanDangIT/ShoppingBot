@@ -22,7 +22,7 @@ namespace ShoppingBot.Behaviors
         }
         public async Task<TResponse> Handle(TRequest request, RequestHandlerDelegate<TResponse> next, CancellationToken cancellationToken)
         {
-            if(!_validators.Any()) { return  await next(); }
+            if (!_validators.Any()) { return await next(); }
             Error[] errors = _validators
                 .Select(x => x.Validate(request))
                 .SelectMany(validationResult => validationResult.Errors)

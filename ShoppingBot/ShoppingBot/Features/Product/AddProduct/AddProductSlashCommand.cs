@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using MediatR;
 using ShoppingBot.Features.Product.AddProduct;
+using ShoppingBot.Shared;
 namespace ShoppingBot.Features.Product
 {
     internal partial class ProductSlashCommands
@@ -20,11 +21,22 @@ namespace ShoppingBot.Features.Product
             var outputEmbed = new DiscordEmbedBuilder();
             if (result.IsFailure)
             {
+                IValidationResult validationResult = (IValidationResult)result;
+                StringBuilder resultsStringBuilder = new StringBuilder();
+                foreach(var error in validationResult.Errors)
+                {
+                    resultsStringBuilder.Append($"{error.Code}: {error.Description}\n");
+                }
                 outputEmbed = new DiscordEmbedBuilder
                 {
                     Color = DiscordColor.Red,
                     Title = $"Product operation response",
-                    Description = $"Product operation failed!"
+                    Description = $"Product operation failed!",
+                    Footer = new DiscordEmbedBuilder.EmbedFooter()
+                    {
+                        Text = "Additional information:\n" +
+                        $"{resultsStringBuilder.ToString()}"
+                    }
                 };
             }
             else
@@ -36,7 +48,6 @@ namespace ShoppingBot.Features.Product
                     Description = $"Product operation successed!"
                 };
             }
-
 
             await ctx.EditResponseAsync(new DiscordWebhookBuilder().AddEmbed(outputEmbed));
         }

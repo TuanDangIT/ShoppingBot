@@ -15,6 +15,7 @@ using FluentValidation;
 using ShoppingBot.Features.Product.EditProductPriceByName;
 using ShoppingBot.Shared;
 using ShoppingBot.Behaviors;
+using ShoppingBot.Features.Product.AddProduct;
 
 namespace ShoppingBot
 {
@@ -33,7 +34,13 @@ namespace ShoppingBot
                 cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly());
                 cfg.AddOpenBehavior(typeof(ValidationPipelineBehavior<,>));
             });
-            services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
+            services.Scan(scan =>
+            {
+                scan.FromAssemblyOf<AddProductCommand>()
+                .AddClasses(classes => classes.AssignableTo(typeof(IValidator<>)))
+                .AsImplementedInterfaces()
+                .WithScopedLifetime();
+            });
             services.AddScoped<IProductRepository, ProductRepository>();
             services.AddHostedService<BotDisconnectHandler>();
             services.AddHostedService<DatabaseInitializer>();
