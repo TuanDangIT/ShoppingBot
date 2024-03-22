@@ -16,7 +16,7 @@ namespace ShoppingBot.Features.Product
             [Option("name", "Item name")] string name)
         {
             await ctx.DeferAsync();
-            var outputEmbed = new DiscordEmbedBuilder();
+            DiscordEmbedBuilder outputEmbed;
             var result = await _mediator.Send(new DeleteProductByNameCommand(name));
             if (result.IsFailure)
             {

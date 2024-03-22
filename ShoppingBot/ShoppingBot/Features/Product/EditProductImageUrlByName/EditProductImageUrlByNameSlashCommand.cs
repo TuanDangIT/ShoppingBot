@@ -16,7 +16,7 @@ namespace ShoppingBot.Features.Product
            , [Option("image-url", "Url link to the image")] string imageUrl)
         {
             await ctx.DeferAsync();
-            var outputEmbed = new DiscordEmbedBuilder();
+            DiscordEmbedBuilder outputEmbed;
             var result = await _mediator.Send(new EditProductImageUrlByNameCommand(name, imageUrl));
             if (result.IsFailure)
             {

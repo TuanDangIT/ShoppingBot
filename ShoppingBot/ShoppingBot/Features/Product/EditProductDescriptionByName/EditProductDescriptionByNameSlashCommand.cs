@@ -16,7 +16,7 @@ namespace ShoppingBot.Features.Product
             , [Option("description", "Item description")] string description)
         {
             await ctx.DeferAsync();
-            var outputEmbed = new DiscordEmbedBuilder();
+            DiscordEmbedBuilder outputEmbed;
             var result = await _mediator.Send(new EditProductDescriptionByNameCommand(name, description));
             if (result.IsFailure)
             {

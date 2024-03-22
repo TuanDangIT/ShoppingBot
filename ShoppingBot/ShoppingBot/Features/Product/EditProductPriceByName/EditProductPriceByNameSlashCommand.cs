@@ -16,7 +16,7 @@ namespace ShoppingBot.Features.Product
             [Option("price", "Item price")] double price)
         {
             await ctx.DeferAsync();
-            var outputEmbed = new DiscordEmbedBuilder();
+            DiscordEmbedBuilder outputEmbed;
             var result = await _mediator.Send(new EditProductPriceByNameCommand(name, price));
             if (result.IsFailure)
             {
