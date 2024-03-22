@@ -18,7 +18,7 @@ namespace ShoppingBot.Features.Product
         {
             await ctx.DeferAsync();
             var result = await _mediator.Send(new GetProductByNameQuery(name));
-            var outputEmbed = new DiscordEmbedBuilder();
+            DiscordEmbedBuilder outputEmbed;
             if (result.IsSuccess && result.Value != null)
             {
                 outputEmbed = new DiscordEmbedBuilder
@@ -39,7 +39,12 @@ namespace ShoppingBot.Features.Product
                 {
                     Color = DiscordColor.Red,
                     Title = $"Product operation response",
-                    Description = $"Product not found",
+                    Description = $"Product get operation failed",
+                    Footer = new DiscordEmbedBuilder.EmbedFooter()
+                    {
+                        Text = $"Additional information: \n" +
+                        $"{result.Error.Code}: {result.Error.Description}"
+                    }
 
                 };
             }
