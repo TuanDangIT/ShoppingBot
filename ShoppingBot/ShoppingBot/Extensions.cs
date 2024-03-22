@@ -16,6 +16,7 @@ using ShoppingBot.Features.Product.EditProductPriceByName;
 using ShoppingBot.Shared;
 using ShoppingBot.Behaviors;
 using ShoppingBot.Features.Product.AddProduct;
+using ShoppingBot.Shared.Behaviors;
 
 namespace ShoppingBot
 {
@@ -32,6 +33,7 @@ namespace ShoppingBot
             services.AddMediatR(cfg =>
             {
                 cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly());
+                cfg.AddOpenBehavior(typeof(ExceptionHandlingBehavior<,>));
                 cfg.AddOpenBehavior(typeof(ValidationPipelineBehavior<,>));
             });
             services.Scan(scan =>
