@@ -34,7 +34,7 @@ namespace ShoppingBot
             {
                 cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly());
                 cfg.AddOpenBehavior(typeof(ExceptionHandlingBehavior<,>));
-                cfg.AddOpenBehavior(typeof(ValidationPipelineBehavior<,>));
+                cfg.AddOpenBehavior(typeof(ValidationBehavior<,>));
                 cfg.AddOpenBehavior(typeof(TransactionBehavior<,>));
             });
             services.Scan(scan =>
