@@ -50,31 +50,13 @@ namespace ShoppingBot
             {
                 Services = _serviceProvider,
             };
-            //_client.ComponentInteractionCreated += _client_ComponentInteractionCreated;
-            _client.UseInteractivity(new DSharpPlus.Interactivity.InteractivityConfiguration()
-            {
-                Timeout = TimeSpan.FromMinutes(5)
-            });
             _commands = _client.UseCommandsNext(commandsConfig);
             _slashCommands = _client.UseSlashCommands(slashCommandConfig);
             RegisterCommands(_commands);
             RegisterSlashCommands(_slashCommands);
             await _client.ConnectAsync();
             await host.RunAsync();
-            //await Task.Delay(-1);
         }
-
-        //private async Task _client_ComponentInteractionCreated(DiscordClient sender, DSharpPlus.EventArgs.ComponentInteractionCreateEventArgs args)
-        //{
-        //    await args.Interaction.CreateResponseAsync(InteractionResponseType.UpdateMessage,
-        //        new DiscordInteractionResponseBuilder()
-        //            .AddEmbed(new DiscordEmbedBuilder()
-        //            {
-        //                Description = "1234"
-        //            })
-        //            .AddComponents());
-        //}
-
         public async Task DisconnectBotAsync()
         {
             await _client.DisconnectAsync();
