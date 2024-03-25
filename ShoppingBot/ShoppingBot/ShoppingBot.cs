@@ -50,6 +50,10 @@ namespace ShoppingBot
             {
                 Services = _serviceProvider,
             };
+            _client.UseInteractivity(new DSharpPlus.Interactivity.InteractivityConfiguration()
+            {
+                Timeout = TimeSpan.FromMinutes(3)
+            });
             _commands = _client.UseCommandsNext(commandsConfig);
             _slashCommands = _client.UseSlashCommands(slashCommandConfig);
             RegisterCommands(_commands);
