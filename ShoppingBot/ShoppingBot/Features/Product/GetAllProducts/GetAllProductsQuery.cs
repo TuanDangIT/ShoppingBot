@@ -9,5 +9,5 @@ using System.Threading.Tasks;
 
 namespace ShoppingBot.Features.Product.GetAllProducts
 {
-    internal record class GetAllProductsQuery : IQuery<IEnumerable<ProductDto>>;
+    internal record class GetAllProductsQuery(int Page) : IQuery<IEnumerable<ProductDto>>;
 }

@@ -11,19 +11,25 @@ using DSharpPlus.SlashCommands;
 using Microsoft.Extensions.Hosting;
 using ShoppingBot.Features.Product;
 using ShoppingBot.Commands;
+using DSharpPlus.Interactivity.Extensions;
+using DSharpPlus.Entities;
+using MediatR;
 
 namespace ShoppingBot
 {
     internal class ShoppingBot
     {
         private readonly IServiceProvider _serviceProvider;
-        private DiscordClient _client { get; set; } = default!;
-        private CommandsNextExtension _commands { get; set; } = default!;
-        private SlashCommandsExtension _slashCommands { get; set; } = default!;
-        private Config _config { get; set; } = default!;
-        public ShoppingBot(IServiceProvider serviceProvider)
+        private readonly IMediator _mediator;
+
+        internal static DiscordClient _client { get; set; } = default!;
+        private static CommandsNextExtension _commands { get; set; } = default!;
+        private static SlashCommandsExtension _slashCommands { get; set; } = default!;
+        private static Config _config { get; set; } = default!;
+        public ShoppingBot(IServiceProvider serviceProvider, IMediator mediator)
         {
             _serviceProvider = serviceProvider;
+            _mediator = mediator;
             using StreamReader streamReader = new StreamReader("config.json");
             string json = streamReader.ReadToEnd();
             _config = JsonConvert.DeserializeObject<Config>(json)!;
@@ -44,6 +50,11 @@ namespace ShoppingBot
             {
                 Services = _serviceProvider,
             };
+            //_client.ComponentInteractionCreated += _client_ComponentInteractionCreated;
+            _client.UseInteractivity(new DSharpPlus.Interactivity.InteractivityConfiguration()
+            {
+                Timeout = TimeSpan.FromMinutes(5)
+            });
             _commands = _client.UseCommandsNext(commandsConfig);
             _slashCommands = _client.UseSlashCommands(slashCommandConfig);
             RegisterCommands(_commands);
@@ -52,6 +63,18 @@ namespace ShoppingBot
             await host.RunAsync();
             //await Task.Delay(-1);
         }
+
+        //private async Task _client_ComponentInteractionCreated(DiscordClient sender, DSharpPlus.EventArgs.ComponentInteractionCreateEventArgs args)
+        //{
+        //    await args.Interaction.CreateResponseAsync(InteractionResponseType.UpdateMessage,
+        //        new DiscordInteractionResponseBuilder()
+        //            .AddEmbed(new DiscordEmbedBuilder()
+        //            {
+        //                Description = "1234"
+        //            })
+        //            .AddComponents());
+        //}
+
         public async Task DisconnectBotAsync()
         {
             await _client.DisconnectAsync();

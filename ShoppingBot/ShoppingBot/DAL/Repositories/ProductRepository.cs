@@ -50,11 +50,14 @@ namespace ShoppingBot.DAL.Repositories
             return changes;
         }
 
-        public async Task<IEnumerable<Product>> GetAllAsync()
+        public async Task<IEnumerable<Product>> GetAllAsync(int page)
         {
-            return await _dbContext.Products
+            int pageSize = 5;
+            var products = await _dbContext.Products
                 .AsNoTracking()
                 .ToListAsync();
+            return products.Skip(pageSize * (page - 1))
+                .Take(pageSize).ToList();
         }
 
         public Task<Product?> GetByNameAsync(string name)

@@ -2,6 +2,7 @@
 using ShoppingBot.DTOs;
 using ShoppingBot.Shared;
 using ShoppingBot.Shared.Abstractions;
+using ShoppingBot.Shared.Errors;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,7 +21,11 @@ namespace ShoppingBot.Features.Product.GetAllProducts
         }
         public async Task<Result<IEnumerable<ProductDto>>> Handle(GetAllProductsQuery request, CancellationToken cancellationToken)
         {
-            var result = await _productRepository.GetAllAsync();
+            var result = await _productRepository.GetAllAsync(request.Page);
+            if(result.Count() == 0 || result is null)
+            {
+                return Result.Failure<IEnumerable<ProductDto>>(ProductErrors.NotFound);
+            }
             return Result.Success(result.Select(x => x.AsDto()));
         }
     }
