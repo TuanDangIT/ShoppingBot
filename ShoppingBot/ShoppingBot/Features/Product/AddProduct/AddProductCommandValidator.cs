@@ -18,7 +18,7 @@ namespace ShoppingBot.Features.Product.AddProduct
                 .MaximumLength(20);
                 //.Custom((value, context) =>
                 //{
-                //    if(dbContext.Products.Any(x => x.Name == value))
+                //    if (dbContext.Products.Any(x => x.Name == value))
                 //    {
                 //        context.AddFailure("Name", "The name is taken");
                 //    }

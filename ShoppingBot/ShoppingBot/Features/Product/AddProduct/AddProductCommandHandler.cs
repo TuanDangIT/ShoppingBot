@@ -22,6 +22,7 @@ namespace ShoppingBot.Features.Product.AddProduct
         {
             var changes = await _productRepository.CreateProductAsync(new Entities.Product()
             {
+                Id = Guid.NewGuid(),
                 Name = request.Name,
                 Price = request.Price,
                 Description = request.Description,
