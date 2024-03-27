@@ -21,7 +21,7 @@ namespace ShoppingBot.Features.Product.GetAllProducts
         }
         public async Task<Result<IEnumerable<ProductDto>>> Handle(GetAllProductsQuery request, CancellationToken cancellationToken)
         {
-            var result = await _productRepository.GetAllAsync(request.Page);
+            var result = await _productRepository.GetAllAsync(request.Page, request.ServerId);
             if(result.Count() == 0 || result is null)
             {
                 return Result.Failure<IEnumerable<ProductDto>>(ProductErrors.NotFound);

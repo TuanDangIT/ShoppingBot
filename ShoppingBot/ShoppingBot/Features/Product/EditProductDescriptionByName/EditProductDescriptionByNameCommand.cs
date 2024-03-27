@@ -7,5 +7,5 @@ using System.Windows.Input;
 
 namespace ShoppingBot.Features.Product.EditProductDescriptionByName
 {
-    internal sealed record class EditProductDescriptionByNameCommand(string Name, string Description) : Shared.Abstractions.ICommand;
+    internal sealed record class EditProductDescriptionByNameCommand(string Name, string Description, string ServerId) : Shared.Abstractions.ICommand;
 }

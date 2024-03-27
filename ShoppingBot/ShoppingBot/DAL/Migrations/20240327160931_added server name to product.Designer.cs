@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using ShoppingBot.DAL;
@@ -11,9 +12,11 @@ using ShoppingBot.DAL;
 namespace ShoppingBot.DAL.Migrations
 {
     [DbContext(typeof(ShoppingBotDbContext))]
-    partial class ShoppingBotDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240327160931_added server name to product")]
+    partial class addedservernametoproduct
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -48,7 +51,7 @@ namespace ShoppingBot.DAL.Migrations
                     b.Property<double>("Price")
                         .HasColumnType("double precision");
 
-                    b.Property<string>("ServerId")
+                    b.Property<string>("ServerName")
                         .IsRequired()
                         .HasColumnType("text");
 

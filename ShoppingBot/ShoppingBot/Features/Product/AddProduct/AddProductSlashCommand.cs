@@ -17,7 +17,8 @@ namespace ShoppingBot.Features.Product
             [Option("price", "Item price")] double price, [Option("description", "Item description")] string description, [Option("image-url", "Url link to the image")] string imageUrl)
         {
             await ctx.DeferAsync();
-            var result = await _mediator.Send(new AddProductCommand(name, price, description, imageUrl));
+            var serverId = ctx.Guild.Id;
+            var result = await _mediator.Send(new AddProductCommand(name, price, description, imageUrl, serverId.ToString()));
             var outputEmbed = new DiscordEmbedBuilder();
             if (result.IsFailure)
             {
@@ -35,7 +36,7 @@ namespace ShoppingBot.Features.Product
                     Footer = new DiscordEmbedBuilder.EmbedFooter()
                     {
                         Text = "Additional information:\n" +
-                        $"{resultsStringBuilder.ToString()}"
+                        $"{resultsStringBuilder}"
                     }
                 };
             }

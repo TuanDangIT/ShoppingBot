@@ -28,7 +28,8 @@ namespace ShoppingBot.Features.Product
             do
             {
                 StringBuilder sb = new StringBuilder();
-                var results = await _mediator.Send(new GetAllProductsQuery(i));
+                var serverId = ctx.Guild.Id;
+                var results = await _mediator.Send(new GetAllProductsQuery(i, serverId.ToString()));
                 if (results.IsFailure)
                 {
                     break;

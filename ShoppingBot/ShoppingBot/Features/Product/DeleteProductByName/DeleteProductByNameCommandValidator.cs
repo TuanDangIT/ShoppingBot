@@ -14,7 +14,7 @@ namespace ShoppingBot.Features.Product.DeleteProductByName
             RuleFor(x => x.Name)
                 .NotNull()
                 .NotEmpty()
-                .MaximumLength(20);
+                .MaximumLength(50);
         }
     }
 }

@@ -31,6 +31,9 @@ namespace ShoppingBot.Features.Product.AddProduct
                 .NotNull()
                 .NotEmpty()
                 .GreaterThanOrEqualTo(0);
+            RuleFor(x => x.ServerId)
+                .NotNull()
+                .NotEmpty();
         }
     }
 }

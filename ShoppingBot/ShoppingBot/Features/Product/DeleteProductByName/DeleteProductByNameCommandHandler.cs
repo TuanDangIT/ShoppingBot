@@ -20,7 +20,7 @@ namespace ShoppingBot.Features.Product.DeleteProductByName
         }
         public async Task<Result> Handle(DeleteProductByNameCommand request, CancellationToken cancellationToken)
         {
-            var product = await _productRepository.GetByNameAsync(request.Name);
+            var product = await _productRepository.GetByNameAsync(request.Name, request.ServerId);
             if(product is null)
             {
                 return Result.Failure(ProductErrors.NotFound);

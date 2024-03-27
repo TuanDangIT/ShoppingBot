@@ -17,7 +17,8 @@ namespace ShoppingBot.Features.Product
         {
             await ctx.DeferAsync();
             DiscordEmbedBuilder outputEmbed;
-            var result = await _mediator.Send(new EditProductImageUrlByNameCommand(name, imageUrl));
+            var serverId = ctx.Guild.Id;
+            var result = await _mediator.Send(new EditProductImageUrlByNameCommand(name, imageUrl, serverId.ToString()));
             if (result.IsFailure)
             {
                 outputEmbed = new DiscordEmbedBuilder

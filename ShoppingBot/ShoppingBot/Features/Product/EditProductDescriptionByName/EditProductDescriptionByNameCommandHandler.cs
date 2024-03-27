@@ -21,7 +21,7 @@ namespace ShoppingBot.Features.Product.EditProductDescriptionByName
         }
         public async Task<Result> Handle(EditProductDescriptionByNameCommand request, CancellationToken cancellationToken)
         {
-            var product = await _productRepository.GetByNameAsync(request.Name);
+            var product = await _productRepository.GetByNameAsync(request.Name, request.ServerId);
             if(product == null)
             {
                 return Result.Failure(ProductErrors.NotFound);

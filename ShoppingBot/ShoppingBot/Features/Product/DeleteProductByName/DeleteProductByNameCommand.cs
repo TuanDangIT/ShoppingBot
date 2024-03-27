@@ -7,5 +7,5 @@ using System.Windows.Input;
 
 namespace ShoppingBot.Features.Product.DeleteProductByName
 {
-    internal sealed record class DeleteProductByNameCommand(string Name) : Shared.Abstractions.ICommand;
+    internal sealed record class DeleteProductByNameCommand(string Name, string ServerId) : Shared.Abstractions.ICommand;
 }

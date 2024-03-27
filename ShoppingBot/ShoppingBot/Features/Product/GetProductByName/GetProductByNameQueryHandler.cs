@@ -21,7 +21,7 @@ namespace ShoppingBot.Features.Product.GetProductByName
         }
         public async Task<Result<ProductDto>> Handle(GetProductByNameQuery request, CancellationToken cancellationToken)
         {
-            var result = await _productRepository.GetByNameAsync(request.Name);
+            var result = await _productRepository.GetByNameAsync(request.Name, request.ServerId);
             if (result == null)
             {
                 return Result.Failure<ProductDto>(ProductErrors.NotFound);

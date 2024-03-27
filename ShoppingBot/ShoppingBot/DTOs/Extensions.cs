@@ -18,6 +18,7 @@ namespace ShoppingBot.DTOs
                 Price = product.Price,
                 Description = product.Description,
                 ImageUrl = product.ImageUrl,
+                ServerId = product.ServerId,
             };
         }
     }

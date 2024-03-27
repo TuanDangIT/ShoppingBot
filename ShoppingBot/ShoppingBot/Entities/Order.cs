@@ -6,7 +6,9 @@ using System.Threading.Tasks;
 
 namespace ShoppingBot.Entities
 {
-    internal class Order
+    public class Order
     {
+        public Guid Id { get; set; }
+        public string ServerId { get; set; } = default!;
     }
 }

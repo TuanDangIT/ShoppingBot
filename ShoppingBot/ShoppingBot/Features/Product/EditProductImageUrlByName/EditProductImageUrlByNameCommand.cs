@@ -7,5 +7,5 @@ using System.Threading.Tasks;
 
 namespace ShoppingBot.Features.Product.EditProductImageUrlByName
 {
-    internal sealed record class EditProductImageUrlByNameCommand(string Name, string ImageUrl) : ICommand;
+    internal sealed record class EditProductImageUrlByNameCommand(string Name, string ImageUrl, string ServerId) : ICommand;
 }

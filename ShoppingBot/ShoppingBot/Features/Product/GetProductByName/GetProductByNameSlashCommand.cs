@@ -17,7 +17,8 @@ namespace ShoppingBot.Features.Product
             [Option("name", "Item name")] string name)
         {
             await ctx.DeferAsync();
-            var result = await _mediator.Send(new GetProductByNameQuery(name));
+            var serverId = ctx.Guild.Id;
+            var result = await _mediator.Send(new GetProductByNameQuery(name, serverId.ToString()));
             DiscordEmbedBuilder outputEmbed;
             if (result.IsSuccess && result.Value != null)
             {
@@ -26,6 +27,10 @@ namespace ShoppingBot.Features.Product
                     Color = DiscordColor.Green,
                     Title = $"{result.Value.Name}",
                     Description = $"{result.Value.Description}",
+                    Footer = new DiscordEmbedBuilder.EmbedFooter()
+                    {
+                        Text = $"{result.Value.ServerId}"
+                    }
                 }.AddField(nameof(result.Value.Price), result.Value.Price.ToString("F"), true);
 
                 if (result.Value.ImageUrl != null && result.Value.ImageUrl.Contains("https"))
