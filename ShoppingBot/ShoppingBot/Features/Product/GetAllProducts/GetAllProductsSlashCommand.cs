@@ -47,7 +47,21 @@ namespace ShoppingBot.Features.Product
                 pageList.Add(page);
                 i++;
             } while (true);
-            await ctx.Channel.SendPaginatedMessageAsync(ctx.Member, pageList);
+            if (pageList.Count == 0)
+            {
+                var outputEmbed = new DiscordEmbedBuilder()
+                {
+                    Color = DiscordColor.Green,
+                    Title = $"Product operation response",
+                    Description = "Product list is empty"
+                };
+                await ctx.EditResponseAsync(new DiscordWebhookBuilder()
+                    .AddEmbed(outputEmbed));
+            }
+            else
+            {
+                await ctx.Channel.SendPaginatedMessageAsync(ctx.Member, pageList);
+            }
         }
     }
 }
