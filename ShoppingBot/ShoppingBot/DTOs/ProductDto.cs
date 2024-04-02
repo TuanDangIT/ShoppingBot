@@ -13,5 +13,7 @@ namespace ShoppingBot.DTOs
         public string Description { get; set; } = default!;
         public string? ImageUrl { get; set; }
         public string ServerId { get; set; } = default!;
+        public DateTime? LastUpdatedAt { get; set; }
+        public DateTime? CreatedAt { get; set; }
     }
 }

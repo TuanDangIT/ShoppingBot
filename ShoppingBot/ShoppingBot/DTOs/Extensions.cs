@@ -19,6 +19,8 @@ namespace ShoppingBot.DTOs
                 Description = product.Description,
                 ImageUrl = product.ImageUrl,
                 ServerId = product.ServerId,
+                LastUpdatedAt = product.LastUpdatedAt,
+                CreatedAt = product.CreatedAt,
             };
         }
     }

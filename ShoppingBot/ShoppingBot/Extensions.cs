@@ -17,6 +17,7 @@ using ShoppingBot.Shared;
 using ShoppingBot.Behaviors;
 using ShoppingBot.Features.Product.AddProduct;
 using ShoppingBot.Shared.Behaviors;
+using ShoppingBot.Shared.Interceptors;
 
 namespace ShoppingBot
 {
@@ -27,6 +28,7 @@ namespace ShoppingBot
             services.AddDbContext<ShoppingBotDbContext>(options =>
             {
                 options.UseNpgsql(configuration.GetConnectionString("Postgres"));
+                options.AddInterceptors(new UpdateAuditableInterceptor());
                 //options.UseSqlServer(configuration.GetConnectionString("MSSQL")); 
             });
             services.AddSingleton<ShoppingBot>();

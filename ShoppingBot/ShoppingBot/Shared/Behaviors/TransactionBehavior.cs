@@ -32,7 +32,7 @@ namespace ShoppingBot.Shared.Behaviors
             {
 
                 var result = await next();
-                await _dbContext.SaveChangesAsync();
+                //await _dbContext.SaveChangesAsync();
                 await transaction.CommitAsync();
                 return result;
             }

@@ -29,7 +29,7 @@ namespace ShoppingBot.Features.Product
                     Description = $"{result.Value.Description}",
                     Footer = new DiscordEmbedBuilder.EmbedFooter()
                     {
-                        Text = $"{result.Value.ServerId}"
+                        Text = $"Last updated: {result.Value.LastUpdatedAt}, Created at: {result.Value.CreatedAt}"
                     }
                 }.AddField(nameof(result.Value.Price), result.Value.Price.ToString("F"), true);
 
