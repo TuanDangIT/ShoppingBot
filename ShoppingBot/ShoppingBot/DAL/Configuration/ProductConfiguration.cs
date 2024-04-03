@@ -20,6 +20,8 @@ namespace ShoppingBot.DAL.Configuration
             builder.HasIndex(x => x.ServerId);
             builder.Property(x => x.Description)
                 .HasColumnType("varchar(200)");
+            builder.HasMany(x => x.Orders)
+                .WithOne(x => x.Product);
         }
     }
 }
