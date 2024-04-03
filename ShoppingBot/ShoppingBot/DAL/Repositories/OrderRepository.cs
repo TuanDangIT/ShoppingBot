@@ -10,6 +10,12 @@ namespace ShoppingBot.DAL.Repositories
 {
     internal class OrderRepository : IOrderRepository
     {
+        private readonly ShoppingBotDbContext _dbContext;
+
+        public OrderRepository(ShoppingBotDbContext dbContext)
+        {
+            _dbContext = dbContext;
+        }
         public Task<int> DeleteOrderByIdAsync(Guid id)
         {
             throw new NotImplementedException();
