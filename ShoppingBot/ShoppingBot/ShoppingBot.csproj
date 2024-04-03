@@ -33,5 +33,9 @@
 	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	  </None>
 	</ItemGroup>
+	<ItemGroup>
+	  <Folder Include="Features\Order\GetAllOrders\" />
+	  <Folder Include="Features\Order\GetOrder\" />
+	</ItemGroup>
 
 </Project>
