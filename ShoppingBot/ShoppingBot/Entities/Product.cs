@@ -15,7 +15,7 @@ namespace ShoppingBot.Entities
         public string Description { get; set; } = default!;
         public string? ImageUrl { get; set; }
         public string ServerId { get; set; } = default!;
-        public DateTime CreatedAt { get; private set; }
-        public DateTime LastUpdatedAt { get; private set; }
+        public DateTime CreatedAt { get; }
+        public DateTime LastUpdatedAt { get; }
     }
 }
