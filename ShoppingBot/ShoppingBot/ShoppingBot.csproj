@@ -34,8 +34,9 @@
 	  </None>
 	</ItemGroup>
 	<ItemGroup>
+	  <Folder Include="Features\Order\DeleteOrderById\" />
 	  <Folder Include="Features\Order\GetAllOrders\" />
-	  <Folder Include="Features\Order\GetOrder\" />
+	  <Folder Include="Features\Order\GetOrderById\" />
 	</ItemGroup>
 
 </Project>
