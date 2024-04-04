@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace ShoppingBot.Features.Order.GetOrderById
 {
-    internal class GetOrderByIdSlashCommand
+    internal partial class OrderSlashCommand
     {
+
     }
 }
