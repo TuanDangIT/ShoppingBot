@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ShoppingBot.Features.Order
 {
-    internal partial class OrderSlashCommand
+    internal partial class OrderSlashCommands
     {
         [SlashCommand("get-order-by-id", "Get a order by id")]
         public async Task GetOrderById(InteractionContext ctx,

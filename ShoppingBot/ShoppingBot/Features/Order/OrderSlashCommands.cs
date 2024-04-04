@@ -10,9 +10,9 @@ using System.Threading.Tasks;
 namespace ShoppingBot.Features.Order
 {
     [SlashCommandGroup("order", "Order operations")]
-    internal partial class OrderSlashCommand : CommandModule
+    internal partial class OrderSlashCommands : CommandModule
     {
-        public OrderSlashCommand(IMediator mediator) : base(mediator)
+        public OrderSlashCommands(IMediator mediator) : base(mediator)
         {
         }
     }
