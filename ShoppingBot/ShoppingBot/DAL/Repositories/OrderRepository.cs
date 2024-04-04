@@ -16,17 +16,23 @@ namespace ShoppingBot.DAL.Repositories
         {
             _dbContext = dbContext;
         }
-        public Task<int> DeleteOrderByIdAsync(Guid id)
+
+        public Task<int> CreateOrderAsync(Order order)
         {
             throw new NotImplementedException();
         }
 
-        public IEnumerable<Order> GetAllOrderAsync()
+        public Task<int> DeleteOrderByIdAsync(Guid id, string serverId)
         {
             throw new NotImplementedException();
         }
 
-        public Order GetOrderByIdAsync(Guid id)
+        public IEnumerable<Order> GetAllOrderAsync(string serverId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Order GetOrderByIdAsync(Guid id, string serverId)
         {
             throw new NotImplementedException();
         }
