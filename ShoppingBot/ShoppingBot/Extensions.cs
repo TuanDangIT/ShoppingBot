@@ -47,6 +47,7 @@ namespace ShoppingBot
                 .WithScopedLifetime();
             });
             services.AddScoped<IProductRepository, ProductRepository>();
+            services.AddScoped<IOrderRepository, OrderRepository>();
             services.AddHostedService<BotDisconnectHandler>();
             services.AddHostedService<DatabaseInitializer>();
             return services;

@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ShoppingBot.Features.Order.GetOrderById
+namespace ShoppingBot.Features.Order.GetAllOrders
 {
-    internal record class GetOrderByIdQuery(Guid Id) : IRequest<OrderDto>;
+    internal record class GetAllOrdersQuery : IRequest<IEnumerable<OrderDto>>;
 }

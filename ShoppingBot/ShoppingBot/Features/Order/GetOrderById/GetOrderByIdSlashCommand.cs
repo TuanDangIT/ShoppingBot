@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ShoppingBot.Features.Order.GetAllOrders
+namespace ShoppingBot.Features.Order.GetOrderById
 {
-    internal class GetAllOrderQuery
+    internal class GetOrderByIdSlashCommand
     {
     }
 }
