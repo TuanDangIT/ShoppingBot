@@ -1,4 +1,5 @@
-﻿using ShoppingBot.DAL.Repositories.Interfaces;
+﻿using Microsoft.EntityFrameworkCore;
+using ShoppingBot.DAL.Repositories.Interfaces;
 using ShoppingBot.Entities;
 using System;
 using System.Collections.Generic;
@@ -17,9 +18,10 @@ namespace ShoppingBot.DAL.Repositories
             _dbContext = dbContext;
         }
 
-        public Task<int> CreateOrderAsync(Order order)
+        public async Task<int> CreateOrderAsync(Order order)
         {
-            throw new NotImplementedException();
+            await _dbContext.AddAsync(order);
+            return await _dbContext.SaveChangesAsync();
         }
 
         public Task<int> DeleteOrderByIdAsync(Guid id, string serverId)
@@ -32,9 +34,14 @@ namespace ShoppingBot.DAL.Repositories
             throw new NotImplementedException();
         }
 
-        public Order GetOrderByIdAsync(Guid id, string serverId)
+        public Task<Order?> GetOrderByIdAsync(Guid id, string serverId)
         {
-            throw new NotImplementedException();
+            var order = _dbContext.Orders
+                .Include(x => x.Product)
+                .Where(x => x.ServerId == serverId)
+                .FirstOrDefault(x => x.Id == id);
+
+            return Task.FromResult(order);
         }
     }
 }

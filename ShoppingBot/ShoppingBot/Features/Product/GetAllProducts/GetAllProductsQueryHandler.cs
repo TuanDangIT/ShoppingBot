@@ -1,5 +1,6 @@
 ﻿using ShoppingBot.DAL.Repositories.Interfaces;
 using ShoppingBot.DTOs;
+using ShoppingBot.Features.Product;
 using ShoppingBot.Shared;
 using ShoppingBot.Shared.Abstractions;
 using ShoppingBot.Shared.Errors;

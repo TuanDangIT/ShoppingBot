@@ -30,6 +30,7 @@ namespace ShoppingBot.Features.Order.CreateOrder
             }
             var change = await _orderRepository.CreateOrderAsync(new Entities.Order()
             {
+                Id = Guid.NewGuid(),
                 Buyer = request.Buyer,
                 ServerId = request.ServerId,
                 ProductId = product.Id,

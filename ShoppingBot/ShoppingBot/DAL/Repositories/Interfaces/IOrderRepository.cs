@@ -11,7 +11,7 @@ namespace ShoppingBot.DAL.Repositories.Interfaces
     internal interface IOrderRepository
     {
         IEnumerable<Order> GetAllOrderAsync(string serverId);
-        Order GetOrderByIdAsync(Guid id, string serverId);
+        Task<Order?> GetOrderByIdAsync(Guid id, string serverId);
         Task<int> DeleteOrderByIdAsync(Guid id, string serverId);
         Task<int> CreateOrderAsync(Order order);
     }
