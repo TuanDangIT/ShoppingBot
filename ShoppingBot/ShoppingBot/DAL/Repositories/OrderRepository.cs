@@ -29,9 +29,15 @@ namespace ShoppingBot.DAL.Repositories
             throw new NotImplementedException();
         }
 
-        public IEnumerable<Order> GetAllOrderAsync(string serverId)
+        public async Task<IEnumerable<Order>> GetAllOrderAsync(int page, string serverId)
         {
-            throw new NotImplementedException();
+            int pageSize = 5;
+            var products = await _dbContext.Orders
+                .AsNoTracking()
+                .Where(x => x.ServerId == serverId)
+                .ToListAsync();
+            return products.Skip(pageSize * (page - 1))
+                .Take(pageSize).ToList();
         }
 
         public Task<Order?> GetOrderByIdAsync(Guid id, string serverId)
