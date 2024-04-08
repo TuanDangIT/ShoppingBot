@@ -14,9 +14,10 @@ namespace ShoppingBot.Features.Order
     internal partial class OrderSlashCommands
     {
         [SlashCommand("create-order", "Create an order")]
-        public async Task GetOrderById(InteractionContext ctx,
+        public async Task CreateOrder(InteractionContext ctx,
             [Option("product-name", "Product name for an order")] string productName)
         {
+            await ctx.DeferAsync();
             var serverId = ctx.Guild.Id;
             var buyerName = ctx.User.Username;
             var result = await _mediator.Send(new CreateOrderCommand(buyerName, productName, serverId.ToString()));

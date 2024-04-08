@@ -11,7 +11,7 @@ namespace ShoppingBot.Entities
     {
         public Guid Id { get; set; }
         public string Buyer { get; set; } = default!;
-        public Product Product { get; set; } = default!;
+        public virtual Product Product { get; set; } = default!;
         public Guid ProductId { get; set; }
         public string ServerId { get; set; } = default!;
         public DateTime CreatedAt { get; set; }

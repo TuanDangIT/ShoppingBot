@@ -15,9 +15,8 @@ namespace ShoppingBot.Features.Order
 {
     internal partial class OrderSlashCommands
     {
-        [SlashCommand("get-order-by-id", "Get a order by id")]
-        public async Task GetAllOrders(InteractionContext ctx,
-            [Option("id", "Order id")] Guid id)
+        [SlashCommand("get-all-orders", "Get all orders")]
+        public async Task GetAllOrders(InteractionContext ctx)
         {
             await ctx.DeferAsync();
             int i = 1;

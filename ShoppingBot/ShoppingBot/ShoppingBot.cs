@@ -14,6 +14,7 @@ using ShoppingBot.Commands;
 using DSharpPlus.Interactivity.Extensions;
 using DSharpPlus.Entities;
 using MediatR;
+using ShoppingBot.Features.Order;
 
 namespace ShoppingBot
 {
@@ -86,8 +87,10 @@ namespace ShoppingBot
         }
         private static void RegisterSlashCommands(SlashCommandsExtension slashCommands)
         {
-            slashCommands.RegisterCommands<TestSlashCommands>();
+            //slashCommands.RegisterCommands<TestSlashCommands>();
+            slashCommands.RegisterCommands<OrderSlashCommands>();
             slashCommands.RegisterCommands<ProductSlashCommands>();
+            
         }
 
         private static Task OnClientReady(DiscordClient sender, DSharpPlus.EventArgs.ReadyEventArgs args)

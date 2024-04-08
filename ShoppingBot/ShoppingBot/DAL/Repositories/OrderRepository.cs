@@ -20,6 +20,7 @@ namespace ShoppingBot.DAL.Repositories
 
         public async Task<int> CreateOrderAsync(Order order)
         {
+            var product = await _dbContext.Products.FirstOrDefaultAsync(x => x.Id == order.ProductId);
             await _dbContext.AddAsync(order);
             return await _dbContext.SaveChangesAsync();
         }
@@ -33,6 +34,7 @@ namespace ShoppingBot.DAL.Repositories
         {
             int pageSize = 5;
             var products = await _dbContext.Orders
+                .Include(x => x.Product)
                 .AsNoTracking()
                 .Where(x => x.ServerId == serverId)
                 .ToListAsync();

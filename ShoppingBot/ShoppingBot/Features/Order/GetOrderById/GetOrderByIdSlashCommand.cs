@@ -14,11 +14,11 @@ namespace ShoppingBot.Features.Order
     {
         [SlashCommand("get-order-by-id", "Get a order by id")]
         public async Task GetOrderById(InteractionContext ctx,
-            [Option("id", "Order id")] Guid id)
+            [Option("id", "Order id")] string id)
         {
             await ctx.DeferAsync();
             var serverId = ctx.Guild.Id;
-            var result = await _mediator.Send(new GetOrderByIdQuery(id, serverId.ToString()));
+            var result = await _mediator.Send(new GetOrderByIdQuery(Guid.Parse(id), serverId.ToString()));
             DiscordEmbedBuilder outputEmbed;
             if (result.IsSuccess && result.Value != null)
             {

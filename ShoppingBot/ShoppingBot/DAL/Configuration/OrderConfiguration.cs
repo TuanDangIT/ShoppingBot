@@ -16,7 +16,8 @@ namespace ShoppingBot.DAL.Configuration
             builder.Property(x => x.Buyer)
                 .IsRequired();
             builder.HasOne(x => x.Product)
-                .WithMany(x => x.Orders);
+                .WithMany(x => x.Orders)
+                .HasForeignKey(x => x.ProductId);
         }
     }
 }
