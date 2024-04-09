@@ -11,5 +11,6 @@ namespace ShoppingBot.Shared.Errors
         public static readonly Error NotCreated = new Error("order-not-created", "Order not created");
         public static readonly Error NotDeleted = new Error("order-not-deleted", "Order not deleted");
         public static readonly Error NotFound = new Error("order-not-found", "Order not found");
+        public static readonly Error NotUpdated = new Error("order-not-found", "Order not updated");
     }
 }
