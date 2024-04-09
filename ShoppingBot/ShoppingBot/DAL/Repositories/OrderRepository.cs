@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 using ShoppingBot.DAL.Repositories.Interfaces;
 using ShoppingBot.Entities;
 using System;
@@ -25,9 +26,18 @@ namespace ShoppingBot.DAL.Repositories
             return await _dbContext.SaveChangesAsync();
         }
 
-        public Task<int> DeleteOrderByIdAsync(Guid id, string serverId)
+        public async Task<int> DeleteOrderByIdAsync(Guid id, string serverId)
         {
-            throw new NotImplementedException();
+            var order = new Order()
+            {
+                Id = id,
+                ServerId = serverId
+            };
+            var entry = _dbContext.Attach(order);
+            entry.State = EntityState.Deleted;
+            var change = await _dbContext.SaveChangesAsync();
+            return change;
+
         }
 
         public async Task<IEnumerable<Order>> GetAllOrderAsync(int page, string serverId)
