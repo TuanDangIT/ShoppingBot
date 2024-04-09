@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ShoppingBot.Shared.Abstractions;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,7 +7,5 @@ using System.Threading.Tasks;
 
 namespace ShoppingBot.Features.Order.DeleteOrderById
 {
-    internal class DeleteOrderByIdCommand
-    {
-    }
+    internal record class DeleteOrderByIdCommand(Guid Id) : ICommand;
 }
