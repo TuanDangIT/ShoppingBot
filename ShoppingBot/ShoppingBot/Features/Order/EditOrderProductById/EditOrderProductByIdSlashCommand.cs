@@ -1,12 +1,49 @@
-﻿using System;
+﻿using DSharpPlus.Entities;
+using DSharpPlus.SlashCommands;
+using ShoppingBot.Features.Order.EditOrderProductById;
+using ShoppingBot.Features.Product.EditProductDescriptionByName;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ShoppingBot.Features.Order.EditOrderProductById
+namespace ShoppingBot.Features.Order
 {
-    internal class EditOrderProductByIdSlashCommand
+    internal partial class OrderSlashCommands
     {
+        [SlashCommand("edit-order-product", "Edit a order's product")]
+        public async Task EditOrderProduct(InteractionContext ctx, [Option("name", "Item name")] string name
+            , [Option("id", "Order id")] string id)
+        {
+            await ctx.DeferAsync();
+            DiscordEmbedBuilder outputEmbed;
+            var serverId = ctx.Guild.Id;
+            var result = await _mediator.Send(new EditOrderProductByIdCommand(name, serverId.ToString(), Guid.Parse(id)));
+            if (result.IsFailure)
+            {
+                outputEmbed = new DiscordEmbedBuilder
+                {
+                    Color = DiscordColor.Green,
+                    Title = $"Order operation response",
+                    Description = "Order edit operation failed",
+                    Footer = new DiscordEmbedBuilder.EmbedFooter()
+                    {
+                        Text = $"Additional information: \n" +
+                        $"{result.Error.Code}: {result.Error.Description}"
+                    }
+                };
+            }
+            else
+            {
+                outputEmbed = new DiscordEmbedBuilder
+                {
+                    Color = DiscordColor.Green,
+                    Title = $"Order operation response",
+                    Description = "Order edit operation successed"
+                };
+            }
+            await ctx.EditResponseAsync(new DiscordWebhookBuilder().AddEmbed(outputEmbed));
+        }
     }
 }
