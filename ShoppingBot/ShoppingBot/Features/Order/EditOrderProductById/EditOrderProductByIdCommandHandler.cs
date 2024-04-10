@@ -1,4 +1,5 @@
 ﻿using ShoppingBot.DAL.Repositories;
+using ShoppingBot.DAL.Repositories.Interfaces;
 using ShoppingBot.DTOs;
 using ShoppingBot.Shared;
 using ShoppingBot.Shared.Abstractions;
@@ -13,10 +14,10 @@ namespace ShoppingBot.Features.Order.EditOrderProductById
 {
     internal class EditOrderProductByIdCommandHandler : ICommandHandler<EditOrderProductByIdCommand>
     {
-        private readonly ProductRepository _productRepository;
-        private readonly OrderRepository _orderRepository;
+        private readonly IProductRepository _productRepository;
+        private readonly IOrderRepository _orderRepository;
 
-        public EditOrderProductByIdCommandHandler(ProductRepository productRepository, OrderRepository orderRepository)
+        public EditOrderProductByIdCommandHandler(IProductRepository productRepository, IOrderRepository orderRepository)
         {
             _productRepository = productRepository;
             _orderRepository = orderRepository;
