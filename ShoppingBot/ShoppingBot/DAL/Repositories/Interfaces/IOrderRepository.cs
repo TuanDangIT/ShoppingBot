@@ -14,5 +14,6 @@ namespace ShoppingBot.DAL.Repositories.Interfaces
         Task<Order?> GetOrderByIdAsync(Guid id, string serverId);
         Task<int> DeleteOrderByIdAsync(Guid id, string serverId);
         Task<int> CreateOrderAsync(Order order);
+        Task<int> EditOrderProductAsync(Order order, Product newProduct);
     }
 }

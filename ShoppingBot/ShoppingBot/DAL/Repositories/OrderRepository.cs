@@ -40,6 +40,13 @@ namespace ShoppingBot.DAL.Repositories
 
         }
 
+        public async Task<int> EditOrderProductAsync(Order order, Product newProduct)
+        {
+            order.ProductId = newProduct.Id;
+            var change = await _dbContext.SaveChangesAsync();
+            return change;
+        }
+
         public async Task<IEnumerable<Order>> GetAllOrderAsync(int page, string serverId)
         {
             int pageSize = 5;
