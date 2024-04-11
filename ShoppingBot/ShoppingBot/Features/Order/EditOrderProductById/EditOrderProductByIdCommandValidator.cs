@@ -5,16 +5,19 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ShoppingBot.Features.Order.DeleteOrderById
+namespace ShoppingBot.Features.Order.EditOrderProductById
 {
-    internal class DeleteOrderByIdCommandValidator : AbstractValidator<DeleteOrderByIdCommand>
+    internal class EditOrderProductByIdCommandValidator : AbstractValidator<EditOrderProductByIdCommand>
     {
-        public DeleteOrderByIdCommandValidator()
+        public EditOrderProductByIdCommandValidator()
         {
             RuleFor(x => x.ServerId)
                 .NotEmpty()
                 .NotNull();
             RuleFor(x => x.Id)
+                .NotEmpty()
+                .NotNull();
+            RuleFor(x => x.Name)
                 .NotEmpty()
                 .NotNull();
         }
