@@ -1,5 +1,6 @@
 ﻿using DSharpPlus.Entities;
 using DSharpPlus.SlashCommands;
+using DSharpPlus.SlashCommands.Attributes;
 using ShoppingBot.Features.Product.DeleteProductByName;
 using System;
 using System.Collections.Generic;
@@ -12,6 +13,7 @@ namespace ShoppingBot.Features.Product
     internal partial class ProductSlashCommands
     {
         [SlashCommand("delete-product", "Delete a product")]
+        [SlashRequirePermissions(DSharpPlus.Permissions.Administrator)]
         public async Task DeleteProductByName(InteractionContext ctx,
             [Option("name", "Item name")] string name)
         {

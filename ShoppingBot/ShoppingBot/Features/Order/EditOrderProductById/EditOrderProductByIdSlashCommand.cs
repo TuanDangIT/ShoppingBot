@@ -1,5 +1,7 @@
-﻿using DSharpPlus.Entities;
+﻿using DSharpPlus.CommandsNext.Attributes;
+using DSharpPlus.Entities;
 using DSharpPlus.SlashCommands;
+using DSharpPlus.SlashCommands.Attributes;
 using ShoppingBot.Features.Order.EditOrderProductById;
 using ShoppingBot.Features.Product.EditProductDescriptionByName;
 using System;
@@ -13,6 +15,7 @@ namespace ShoppingBot.Features.Order
     internal partial class OrderSlashCommands
     {
         [SlashCommand("edit-order-product", "Edit a order's product")]
+        [SlashRequirePermissions(DSharpPlus.Permissions.Administrator)]
         public async Task EditOrderProduct(InteractionContext ctx, [Option("name", "Item name")] string name
             , [Option("id", "Order id")] string id)
         {

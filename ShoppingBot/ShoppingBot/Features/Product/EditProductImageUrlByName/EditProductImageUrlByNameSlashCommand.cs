@@ -1,5 +1,7 @@
-﻿using DSharpPlus.Entities;
+﻿using DSharpPlus.CommandsNext.Attributes;
+using DSharpPlus.Entities;
 using DSharpPlus.SlashCommands;
+using DSharpPlus.SlashCommands.Attributes;
 using ShoppingBot.Features.Product.EditProductImageUrlByName;
 using System;
 using System.Collections.Generic;
@@ -12,6 +14,7 @@ namespace ShoppingBot.Features.Product
     internal partial class ProductSlashCommands
     {
         [SlashCommand("edit-product-imageurl", "Edit a product's image URL")]
+        [SlashRequirePermissions(DSharpPlus.Permissions.Administrator)]
         public async Task EditProductImageUrlByName(InteractionContext ctx, [Option("name", "Item name")] string name
            , [Option("image-url", "Url link to the image")] string imageUrl)
         {

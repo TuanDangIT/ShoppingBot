@@ -1,5 +1,7 @@
-﻿using DSharpPlus.Entities;
+﻿using DSharpPlus.CommandsNext.Attributes;
+using DSharpPlus.Entities;
 using DSharpPlus.SlashCommands;
+using DSharpPlus.SlashCommands.Attributes;
 using ShoppingBot.Features.Order.CreateOrder;
 using ShoppingBot.Shared;
 using System;
@@ -14,6 +16,7 @@ namespace ShoppingBot.Features.Order
     internal partial class OrderSlashCommands
     {
         [SlashCommand("create-order", "Create an order")]
+        [SlashRequirePermissions(DSharpPlus.Permissions.Administrator)]
         public async Task CreateOrder(InteractionContext ctx,
             [Option("product-name", "Product name for an order")] string productName)
         {

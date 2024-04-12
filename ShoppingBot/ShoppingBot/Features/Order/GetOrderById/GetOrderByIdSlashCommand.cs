@@ -1,5 +1,7 @@
-﻿using DSharpPlus.Entities;
+﻿using DSharpPlus.CommandsNext.Attributes;
+using DSharpPlus.Entities;
 using DSharpPlus.SlashCommands;
+using DSharpPlus.SlashCommands.Attributes;
 using ShoppingBot.Features.Order.GetOrderById;
 using ShoppingBot.Features.Product.GetProductByName;
 using System;
@@ -13,6 +15,7 @@ namespace ShoppingBot.Features.Order
     internal partial class OrderSlashCommands
     {
         [SlashCommand("get-order-by-id", "Get a order by id")]
+        [SlashRequirePermissions(DSharpPlus.Permissions.Administrator)]
         public async Task GetOrderById(InteractionContext ctx,
             [Option("id", "Order id")] string id)
         {

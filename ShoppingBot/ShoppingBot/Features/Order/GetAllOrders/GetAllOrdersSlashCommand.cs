@@ -1,7 +1,9 @@
-﻿using DSharpPlus.Entities;
+﻿using DSharpPlus.CommandsNext.Attributes;
+using DSharpPlus.Entities;
 using DSharpPlus.Interactivity;
 using DSharpPlus.Interactivity.Extensions;
 using DSharpPlus.SlashCommands;
+using DSharpPlus.SlashCommands.Attributes;
 using ShoppingBot.DTOs;
 using ShoppingBot.Features.Order.GetAllOrders;
 using ShoppingBot.Features.Product.GetAllProducts;
@@ -16,6 +18,7 @@ namespace ShoppingBot.Features.Order
     internal partial class OrderSlashCommands
     {
         [SlashCommand("get-all-orders", "Get all orders")]
+        [SlashRequirePermissions(DSharpPlus.Permissions.Administrator)]
         public async Task GetAllOrders(InteractionContext ctx)
         {
             await ctx.DeferAsync();
