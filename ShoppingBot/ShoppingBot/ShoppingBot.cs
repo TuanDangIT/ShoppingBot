@@ -15,6 +15,7 @@ using DSharpPlus.Interactivity.Extensions;
 using DSharpPlus.Entities;
 using MediatR;
 using ShoppingBot.Features.Order;
+using DSharpPlus.SlashCommands.Attributes;
 
 namespace ShoppingBot
 {
@@ -57,6 +58,15 @@ namespace ShoppingBot
             });
             _commands = _client.UseCommandsNext(commandsConfig);
             _slashCommands = _client.UseSlashCommands(slashCommandConfig);
+            _slashCommands.SlashCommandErrored += async (s, e) =>
+            {
+                if (e.Exception is SlashExecutionChecksFailedException slex)
+                {
+                    foreach (var check in slex.FailedChecks)
+                        if (check is SlashRequirePermissionsAttribute att)
+                            await e.Context.CreateResponseAsync(InteractionResponseType.ChannelMessageWithSource, new DiscordInteractionResponseBuilder().WithContent($"Only Administrator can run this command!"));
+                }
+            };
             RegisterCommands(_commands);
             RegisterSlashCommands(_slashCommands);
             await _client.ConnectAsync();
