@@ -3,6 +3,7 @@ using DSharpPlus.SlashCommands;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using ShoppingBot.DAL;
+using ShoppingBot.DTOs;
 using ShoppingBot.Features.Product.AddProduct;
 using ShoppingBot.Features.Product.DeleteProductByName;
 using ShoppingBot.Features.Product.EditProductDescriptionByName;

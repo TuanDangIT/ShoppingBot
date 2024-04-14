@@ -2,6 +2,7 @@
 using DSharpPlus.Entities;
 using DSharpPlus.SlashCommands;
 using DSharpPlus.SlashCommands.Attributes;
+using ShoppingBot.DTOs;
 using ShoppingBot.Features.Order.GetOrderById;
 using ShoppingBot.Features.Product.GetProductByName;
 using System;
@@ -21,8 +22,10 @@ namespace ShoppingBot.Features.Order
         {
             await ctx.DeferAsync();
             var serverId = ctx.Guild.Id;
-            var result = await _mediator.Send(new GetOrderByIdQuery(Guid.Parse(id), serverId.ToString()));
-            DiscordEmbedBuilder outputEmbed;
+            DiscordEmbedBuilder outputEmbed = new DiscordEmbedBuilder();
+            Guid.TryParse(id, out var guidParsed);
+            var result = await _mediator.Send(new GetOrderByIdQuery(guidParsed, serverId.ToString()));
+            
             if (result.IsSuccess && result.Value != null)
             {
                 outputEmbed = new DiscordEmbedBuilder

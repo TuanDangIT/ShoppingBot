@@ -1,5 +1,6 @@
 ﻿using DSharpPlus.CommandsNext;
 using DSharpPlus.CommandsNext.Attributes;
+using DSharpPlus.Interactivity.Extensions;
 using DSharpPlus.SlashCommands;
 using ShoppingBot.DAL;
 using System;
@@ -15,7 +16,12 @@ namespace ShoppingBot.Commands
         [Command("test")]
         public async Task TestCommand(CommandContext ctx)
         {
-            await ctx.Channel.SendMessageAsync("ShoppingBot working...");
+            var reallyLongString = "Lorem ipsum dolor sit amet, consectetur adipiscing ...";
+
+            var interactivity = ctx.Client.GetInteractivity();
+            var pages = interactivity.GeneratePagesInEmbed(reallyLongString);
+
+            await ctx.Channel.SendPaginatedMessageAsync(ctx.Member, pages);
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using DSharpPlus.SlashCommands;
 using MediatR;
+using ShoppingBot.DTOs;
 using ShoppingBot.Shared;
 using System;
 using System.Collections.Generic;
