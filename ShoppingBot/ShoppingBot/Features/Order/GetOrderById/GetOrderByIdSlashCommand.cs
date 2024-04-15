@@ -20,41 +20,43 @@ namespace ShoppingBot.Features.Order
         public async Task GetOrderById(InteractionContext ctx,
             [Option("id", "Order id")] string id)
         {
-            await ctx.DeferAsync();
-            var serverId = ctx.Guild.Id;
-            DiscordEmbedBuilder outputEmbed = new DiscordEmbedBuilder();
             Guid.TryParse(id, out var guidParsed);
-            var result = await _mediator.Send(new GetOrderByIdQuery(guidParsed, serverId.ToString()));
+            await Get<OrderDto>(ctx, new GetOrderByIdQuery(guidParsed, ctx.Guild.Id.ToString()));
+            //await ctx.DeferAsync();
+            //var serverId = ctx.Guild.Id;
+            //DiscordEmbedBuilder outputEmbed = new DiscordEmbedBuilder();
+            //Guid.TryParse(id, out var guidParsed);
+            //var result = await _mediator.Send(new GetOrderByIdQuery(guidParsed, serverId.ToString()));
             
-            if (result.IsSuccess && result.Value != null)
-            {
-                outputEmbed = new DiscordEmbedBuilder
-                {
-                    Color = DiscordColor.Green,
-                    Title = $"{result.Value.Id}",
-                    Description = $"{result.Value.Product.Name}",
-                    Footer = new DiscordEmbedBuilder.EmbedFooter()
-                    {
-                        Text = $"Last updated : {result.Value.LastUpdatedAt} (UTC +02:00), Created at: {result.Value.CreatedAt} (UTC +02:00)"
-                    }
-                }.AddField(nameof(result.Value.Product), result.Value.Product.Name, true);
-            }
-            else
-            {
-                outputEmbed = new DiscordEmbedBuilder
-                {
-                    Color = DiscordColor.Red,
-                    Title = $"Order operation response",
-                    Description = $"Order get operation failed",
-                    Footer = new DiscordEmbedBuilder.EmbedFooter()
-                    {
-                        Text = $"Additional information: \n" +
-                        $"{result.Error.Code}: {result.Error.Description}"
-                    }
+            //if (result.IsSuccess && result.Value != null)
+            //{
+            //    outputEmbed = new DiscordEmbedBuilder
+            //    {
+            //        Color = DiscordColor.Green,
+            //        Title = $"{result.Value.Id}",
+            //        Description = $"{result.Value.Product.Name}",
+            //        Footer = new DiscordEmbedBuilder.EmbedFooter()
+            //        {
+            //            Text = $"Last updated : {result.Value.LastUpdatedAt} (UTC +02:00), Created at: {result.Value.CreatedAt} (UTC +02:00)"
+            //        }
+            //    }.AddField(nameof(result.Value.Product), result.Value.Product.Name, true);
+            //}
+            //else
+            //{
+            //    outputEmbed = new DiscordEmbedBuilder
+            //    {
+            //        Color = DiscordColor.Red,
+            //        Title = $"Order operation response",
+            //        Description = $"Order get operation failed",
+            //        Footer = new DiscordEmbedBuilder.EmbedFooter()
+            //        {
+            //            Text = $"Additional information: \n" +
+            //            $"{result.Error.Code}: {result.Error.Description}"
+            //        }
 
-                };
-            }
-            await ctx.EditResponseAsync(new DiscordWebhookBuilder().AddEmbed(outputEmbed));
+            //    };
+            //}
+            //await ctx.EditResponseAsync(new DiscordWebhookBuilder().AddEmbed(outputEmbed));
         }
     }
 }
