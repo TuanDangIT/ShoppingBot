@@ -215,7 +215,7 @@ namespace ShoppingBot.Shared
                 {
                     Color = DiscordColor.Red,
                     Title = $"{nameof(T)} operation response",
-                    Description = "{nameof(T)} edit operation failed",
+                    Description = $"{nameof(T)} edit operation failed",
                     Footer = new DiscordEmbedBuilder.EmbedFooter()
                     {
                         Text = $"Additional information: \n" +
