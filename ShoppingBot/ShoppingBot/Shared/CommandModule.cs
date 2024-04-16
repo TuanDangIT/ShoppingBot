@@ -10,6 +10,8 @@ using ShoppingBot.Features.Order.EditOrderProductById;
 using ShoppingBot.Features.Order.GetAllOrders;
 using ShoppingBot.Features.Order.GetOrderById;
 using ShoppingBot.Features.Product.DeleteProductByName;
+using ShoppingBot.Features.Product.GetAllProducts;
+using ShoppingBot.Features.Product.GetProductByName;
 using ShoppingBot.Shared.Abstractions;
 using ShoppingBot.Shared.Enums;
 using System;
@@ -17,6 +19,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace ShoppingBot.Shared
 {
@@ -87,9 +90,8 @@ namespace ShoppingBot.Shared
             }
             await ctx.EditResponseAsync(new DiscordWebhookBuilder().AddEmbed(outputEmbed));
         }
-        public async Task GetAll<T>(InteractionContext ctx, IQuery<IEnumerable<T>> query,
-            string batch)
-            where T : class, IAuditable
+        public async Task GetAll<T>(InteractionContext ctx, EntityCode entityCode)
+            where T : class
         {
             await ctx.DeferAsync();
             int i = 1;
@@ -98,20 +100,34 @@ namespace ShoppingBot.Shared
             {
                 StringBuilder sb = new StringBuilder();
                 var serverId = ctx.Guild.Id;
-                var results = await _mediator.Send(query);
-                if (results.IsFailure)
+                Result<IEnumerable<T>>?results = default!;
+                if (entityCode == EntityCode.Order)
+                {
+                    results = (await _mediator.Send(new GetAllOrdersQuery(i, serverId.ToString()))!)! as Result<IEnumerable<T>>;
+                }
+                else if (entityCode == EntityCode.Product)
+                {
+                    results = (await _mediator.Send(new GetAllProductsQuery(i, serverId.ToString()))!)! as Result<IEnumerable<T>>;
+                }
+                if (results!.IsFailure)
                 {
                     break;
                 }
-                //foreach (var item in results.Value)
-                //{
-                //    sb.Append($"{item.Id}, {item.Buyer}, {item.Product.Name} \n");
-                //}
+                foreach (var item in results.Value)
+                {
+                    if(item is OrderDto orderDto)
+                    {
+                        sb.Append($"{orderDto.Id}, {orderDto.Buyer}, {orderDto.Product.Name} \n");
+                    }else if(item is ProductDto productDto)
+                    {
+                        sb.Append($"{productDto.Name}, {productDto.Price} \n");
+                    }
+                }
                 var page = new Page("", new DiscordEmbedBuilder
                 {
                     Color = DiscordColor.Green,
                     Title = $"{nameof(T)} operation response",
-                    Description = batch
+                    Description = sb.ToString()
                 });
                 pageList.Add(page);
                 i++;

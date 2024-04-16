@@ -6,7 +6,9 @@ using System.Threading.Tasks;
 
 namespace ShoppingBot.Shared.Enums
 {
-    internal class EntityCode
+    internal enum EntityCode
     {
+        Order,
+        Product
     }
 }
