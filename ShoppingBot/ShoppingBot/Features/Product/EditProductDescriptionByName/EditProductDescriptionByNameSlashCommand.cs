@@ -20,34 +20,6 @@ namespace ShoppingBot.Features.Product
             , [Option("description", "Item description")] string description)
         {
             await Edit<Entities.Product>(ctx, new EditProductDescriptionByNameCommand(name, description, ctx.Guild.Id.ToString()));
-            //await ctx.DeferAsync();
-            //DiscordEmbedBuilder outputEmbed;
-            //var serverId = ctx.Guild.Id;
-            //var result = await _mediator.Send(new EditProductDescriptionByNameCommand(name, description, serverId.ToString()));
-            //if (result.IsFailure)
-            //{
-            //    outputEmbed = new DiscordEmbedBuilder
-            //    {
-            //        Color = DiscordColor.Green,
-            //        Title = $"Product operation response",
-            //        Description = "Product edit operation failed",
-            //        Footer = new DiscordEmbedBuilder.EmbedFooter()
-            //        {
-            //            Text = $"Additional information: \n" +
-            //            $"{result.Error.Code}: {result.Error.Description}"
-            //        }
-            //    };
-            //}
-            //else
-            //{
-            //    outputEmbed = new DiscordEmbedBuilder
-            //    {
-            //        Color = DiscordColor.Green,
-            //        Title = $"Product operation response",
-            //        Description = "Product edit operation successed"
-            //    };
-            //}
-            //await ctx.EditResponseAsync(new DiscordWebhookBuilder().AddEmbed(outputEmbed));
         }
     }
 }

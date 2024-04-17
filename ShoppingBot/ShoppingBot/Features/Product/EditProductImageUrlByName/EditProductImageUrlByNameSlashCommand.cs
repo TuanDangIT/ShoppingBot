@@ -20,34 +20,6 @@ namespace ShoppingBot.Features.Product
            , [Option("image-url", "Url link to the image")] string imageUrl)
         {
             await Edit<Entities.Product>(ctx, new EditProductImageUrlByNameCommand(name, imageUrl, ctx.Guild.Id.ToString()));
-            //await ctx.DeferAsync();
-            //DiscordEmbedBuilder outputEmbed;
-            //var serverId = ctx.Guild.Id;
-            //var result = await _mediator.Send(new EditProductImageUrlByNameCommand(name, imageUrl, serverId.ToString()));
-            //if (result.IsFailure)
-            //{
-            //    outputEmbed = new DiscordEmbedBuilder
-            //    {
-            //        Color = DiscordColor.Red,
-            //        Title = $"Product operation response",
-            //        Description = "Product edit operation failed",
-            //        Footer = new DiscordEmbedBuilder.EmbedFooter()
-            //        {
-            //            Text = $"Additional information: \n" +
-            //            $"{result.Error.Code}: {result.Error.Description}"
-            //        }
-            //    };
-            //}
-            //else
-            //{
-            //    outputEmbed = new DiscordEmbedBuilder
-            //    {
-            //        Color = DiscordColor.Green,
-            //        Title = $"Product operation response",
-            //        Description = "Product edit operation successed"
-            //    };
-            //}
-            //await ctx.EditResponseAsync(new DiscordWebhookBuilder().AddEmbed(outputEmbed));
         }
     }
 }

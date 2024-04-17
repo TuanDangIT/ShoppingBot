@@ -19,34 +19,6 @@ namespace ShoppingBot.Features.Product
             [Option("price", "Item price")] double price)
         {
             await Edit<Entities.Product>(ctx, new EditProductPriceByNameCommand(name, price, ctx.Guild.Id.ToString()));
-            //await ctx.DeferAsync();
-            //DiscordEmbedBuilder outputEmbed;
-            //var serverId = ctx.Guild.Id;
-            //var result = await _mediator.Send(new EditProductPriceByNameCommand(name, price, serverId.ToString()));
-            //if (result.IsFailure)
-            //{
-            //    outputEmbed = new DiscordEmbedBuilder
-            //    {
-            //        Color = DiscordColor.Red,
-            //        Title = $"Product operation response",
-            //        Description = "Product edit operation failed",
-            //        Footer = new DiscordEmbedBuilder.EmbedFooter()
-            //        {
-            //            Text = $"Additional information: \n" +
-            //            $"{result.Error.Code}: {result.Error.Description}"
-            //        }
-            //    };
-            //}
-            //else
-            //{
-            //    outputEmbed = new DiscordEmbedBuilder
-            //    {
-            //        Color = DiscordColor.Green,
-            //        Title = $"Product operation response",
-            //        Description = "Product edit operation successed"
-            //    };
-            //}
-            //await ctx.EditResponseAsync(new DiscordWebhookBuilder().AddEmbed(outputEmbed));
         }
 
     }

@@ -18,44 +18,6 @@ namespace ShoppingBot.Features.Product
             [Option("name", "Item name")] string name)
         {
             await Get<ProductDto>(ctx, new GetProductByNameQuery(name, ctx.Guild.Id.ToString()));
-            //await ctx.DeferAsync();
-            //var serverId = ctx.Guild.Id;
-            //var result = await _mediator.Send(new GetProductByNameQuery(name, serverId.ToString()));
-            //DiscordEmbedBuilder outputEmbed;
-            //if (result.IsSuccess && result.Value != null)
-            //{
-            //    outputEmbed = new DiscordEmbedBuilder
-            //    {
-            //        Color = DiscordColor.Green,
-            //        Title = $"{result.Value.Name}",
-            //        Description = $"{result.Value.Description}",
-            //        Footer = new DiscordEmbedBuilder.EmbedFooter()
-            //        {
-            //            Text = $"Last updated : {result.Value.LastUpdatedAt} (UTC +02:00), Created at: {result.Value.CreatedAt} (UTC +02:00)"
-            //        }
-            //    }.AddField(nameof(result.Value.Price), result.Value.Price.ToString("F"), true);
-
-            //    if (result.Value.ImageUrl != null && result.Value.ImageUrl.Contains("https"))
-            //    {
-            //        outputEmbed.ImageUrl = result.Value.ImageUrl;
-            //    }
-            //}
-            //else
-            //{
-            //    outputEmbed = new DiscordEmbedBuilder
-            //    {
-            //        Color = DiscordColor.Red,
-            //        Title = $"Product operation response",
-            //        Description = $"Product get operation failed",
-            //        Footer = new DiscordEmbedBuilder.EmbedFooter()
-            //        {
-            //            Text = $"Additional information: \n" +
-            //            $"{result.Error.Code}: {result.Error.Description}"
-            //        }
-
-            //    };
-            //}
-            //await ctx.EditResponseAsync(new DiscordWebhookBuilder().AddEmbed(outputEmbed));
         }
     }
 }

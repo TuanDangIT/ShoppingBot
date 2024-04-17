@@ -22,48 +22,6 @@ namespace ShoppingBot.Features.Product
         public async Task GetAllProducts(InteractionContext ctx)
         {
             await GetAll<ProductDto>(ctx, EntityCode.Product);
-            //await ctx.DeferAsync();
-            //int i = 1;
-            //var pageList = new List<Page>();
-            //var interactivity = ShoppingBot._client.GetInteractivity();
-            //IEnumerable<ProductDto> productDtos = new List<ProductDto>();
-            //do
-            //{
-            //    StringBuilder sb = new StringBuilder();
-            //    var serverId = ctx.Guild.Id;
-            //    var results = await _mediator.Send(new GetAllProductsQuery(i, serverId.ToString()));
-            //    if (results.IsFailure)
-            //    {
-            //        break;
-            //    }
-            //    foreach (var item in results.Value)
-            //    {
-            //        sb.Append($"{item.Name}, {item.Price} \n");
-            //    }
-            //    var page = new Page("", new DiscordEmbedBuilder
-            //    {
-            //        Color = DiscordColor.Green,
-            //        Title = $"Product operation response",
-            //        Description = sb.ToString()
-            //    });
-            //    pageList.Add(page);
-            //    i++;
-            //} while (true);
-            //if (pageList.Count == 0)
-            //{
-            //    var outputEmbed = new DiscordEmbedBuilder()
-            //    {
-            //        Color = DiscordColor.Green,
-            //        Title = $"Product operation response",
-            //        Description = "Product list is empty"
-            //    };
-            //    await ctx.EditResponseAsync(new DiscordWebhookBuilder()
-            //        .AddEmbed(outputEmbed));
-            //}
-            //else
-            //{
-            //    await ctx.Channel.SendPaginatedMessageAsync(ctx.Member, pageList);
-            //}
         }
     }
 }

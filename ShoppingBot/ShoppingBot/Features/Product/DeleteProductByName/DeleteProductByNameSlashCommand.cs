@@ -18,34 +18,6 @@ namespace ShoppingBot.Features.Product
             [Option("name", "Item name")] string name)
         {
             await Delete<Entities.Product>(ctx, new DeleteProductByNameCommand(name, ctx.Guild.Id.ToString()));
-            //await ctx.DeferAsync();
-            //DiscordEmbedBuilder outputEmbed;
-            //var serverId = ctx.Guild.Id;
-            //var result = await _mediator.Send(new DeleteProductByNameCommand(name, serverId.ToString()));
-            //if (result.IsFailure)
-            //{
-            //    outputEmbed = new DiscordEmbedBuilder
-            //    {
-            //        Color = DiscordColor.Red,
-            //        Title = $"Product operation response",
-            //        Description = "Product delete operation failed",
-            //        Footer = new DiscordEmbedBuilder.EmbedFooter()
-            //        {
-            //            Text = $"Additional information: \n" +
-            //            $"{result.Error.Code}: {result.Error.Description}"
-            //        }
-            //    };
-            //}
-            //else
-            //{
-            //    outputEmbed = new DiscordEmbedBuilder
-            //    {
-            //        Color = DiscordColor.Green,
-            //        Title = $"Product operation response",
-            //        Description = "Product delete operation successed"
-            //    };
-            //}
-            //await ctx.EditResponseAsync(new DiscordWebhookBuilder().AddEmbed(outputEmbed));
         }
     }
 }
