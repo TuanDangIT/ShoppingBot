@@ -20,7 +20,7 @@ namespace ShoppingBot.Features.Order
             , [Option("id", "Order id")] string id)
         {
             Guid.TryParse(id, out var guidParsed);
-            await   Edit<Entities.Order>(ctx, new EditOrderProductByIdCommand(name, ctx.Guild.Id.ToString(), guidParsed));
+            await   Edit<Entities.Order>(ctx, new EditOrderProductByIdCommand(id, name, ctx.Guild.Id.ToString()));
         }
     }
 }

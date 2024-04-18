@@ -24,12 +24,17 @@ namespace ShoppingBot.Features.Order.EditOrderProductById
         }
         public async Task<Result> Handle(EditOrderProductByIdCommand request, CancellationToken cancellationToken)
         {
+            var parseResult = Guid.TryParse(request.GuidId, out var guidParsed);
+            if (!parseResult)
+            {
+                return Result.Failure<OrderDto>(OrderErrors.NotGuidFormat);
+            }
             var product = await _productRepository.GetByNameAsync(request.Name, request.ServerId);
             if(product is null)
             {
                 return Result.Failure(ProductErrors.NotFound);
             }
-            var order = await _orderRepository.GetOrderByIdAsync(request.Id, request.ServerId);
+            var order = await _orderRepository.GetOrderByIdAsync(guidParsed, request.ServerId);
             if (order is null)
             {
                 return Result.Failure(OrderErrors.NotFound);

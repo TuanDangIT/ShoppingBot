@@ -9,5 +9,5 @@ using System.Threading.Tasks;
 
 namespace ShoppingBot.Features.Order.GetOrderById
 {
-    internal record class GetOrderByIdQuery(Guid Id, string ServerId) : IQuery<OrderDto>;
+    internal record class GetOrderByIdQuery(string GuidId, string ServerId) : IQuery<OrderDto>;
 }

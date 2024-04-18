@@ -1,5 +1,6 @@
 ﻿using ShoppingBot.DAL.Repositories;
 using ShoppingBot.DAL.Repositories.Interfaces;
+using ShoppingBot.DTOs;
 using ShoppingBot.Shared;
 using ShoppingBot.Shared.Abstractions;
 using ShoppingBot.Shared.Errors;
@@ -21,7 +22,11 @@ namespace ShoppingBot.Features.Order.DeleteOrderById
         }
         public async Task<Result> Handle(DeleteOrderByIdCommand request, CancellationToken cancellationToken)
         {
-            var change = await _orderRepository.DeleteOrderByIdAsync(request.Id, request.ServerId);
+            if (Guid.TryParse(request.GuidId, out var guidParsed))
+            {
+                return Result.Failure<OrderDto>(OrderErrors.NotGuidFormat);
+            }
+            var change = await _orderRepository.DeleteOrderByIdAsync(guidParsed, request.ServerId);
             if(change is 0)
             {
                 return Result.Failure(OrderErrors.NotDeleted);

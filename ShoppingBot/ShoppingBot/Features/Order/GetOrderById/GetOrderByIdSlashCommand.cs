@@ -20,8 +20,7 @@ namespace ShoppingBot.Features.Order
         public async Task GetOrderById(InteractionContext ctx,
             [Option("id", "Order id")] string id)
         {
-            Guid.TryParse(id, out var guidParsed);
-            await Get<OrderDto>(ctx, new GetOrderByIdQuery(guidParsed, ctx.Guild.Id.ToString()));
+            await Get<OrderDto>(ctx, new GetOrderByIdQuery(id, ctx.Guild.Id.ToString()));
         }
     }
 }

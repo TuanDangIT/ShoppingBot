@@ -7,5 +7,5 @@ using System.Threading.Tasks;
 
 namespace ShoppingBot.Features.Order.DeleteOrderById
 {
-    internal record class DeleteOrderByIdCommand(Guid Id, string ServerId) : ICommand;
+    internal record class DeleteOrderByIdCommand(string GuidId, string ServerId) : ICommand;
 }

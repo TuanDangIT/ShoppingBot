@@ -14,7 +14,7 @@ namespace ShoppingBot.Features.Order
             [Option("id", "Order id")] string id)
         {
             Guid.TryParse(id, out var guidParsed);
-            await Delete<Entities.Order>(ctx, new DeleteOrderByIdCommand(guidParsed, ctx.Guild.Id.ToString()));
+            await Delete<Entities.Order>(ctx, new DeleteOrderByIdCommand(id, ctx.Guild.Id.ToString()));
         }
     }
 }

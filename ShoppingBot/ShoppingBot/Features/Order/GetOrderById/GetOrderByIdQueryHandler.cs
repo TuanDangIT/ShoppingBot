@@ -24,7 +24,11 @@ namespace ShoppingBot.Features.Order.GetOrderById
 
         public async Task<Result<OrderDto>> Handle(GetOrderByIdQuery request, CancellationToken cancellationToken)
         {
-            var order = await _orderRepository.GetOrderByIdAsync(request.Id, request.ServerId);
+            if(Guid.TryParse(request.GuidId, out var guidParsed))
+            {
+                return Result.Failure<OrderDto>(OrderErrors.NotGuidFormat);
+            }
+            var order = await _orderRepository.GetOrderByIdAsync(guidParsed, request.ServerId);
             if (order is null)
             {
                 return Result.Failure<OrderDto>(OrderErrors.NotFound);

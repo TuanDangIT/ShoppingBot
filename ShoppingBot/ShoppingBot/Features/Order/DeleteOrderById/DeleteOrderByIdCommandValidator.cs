@@ -14,7 +14,7 @@ namespace ShoppingBot.Features.Order.DeleteOrderById
             RuleFor(x => x.ServerId)
                 .NotEmpty()
                 .NotNull();
-            RuleFor(x => x.Id)
+            RuleFor(x => x.GuidId)
                 .NotEmpty()
                 .NotNull();
         }

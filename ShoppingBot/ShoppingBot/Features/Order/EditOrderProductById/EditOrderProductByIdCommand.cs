@@ -7,5 +7,5 @@ using System.Threading.Tasks;
 
 namespace ShoppingBot.Features.Order.EditOrderProductById
 {
-    internal record class EditOrderProductByIdCommand(string Name, string ServerId, Guid Id) : ICommand;
+    internal record class EditOrderProductByIdCommand(string GuidId, string Name, string ServerId) : ICommand;
 }
