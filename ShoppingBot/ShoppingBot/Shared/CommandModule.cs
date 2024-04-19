@@ -75,6 +75,12 @@ namespace ShoppingBot.Shared
             }
             else
             {
+                IValidationResult validationResult = (IValidationResult)result;
+                StringBuilder validationrResultsStringBuilder = new StringBuilder();
+                foreach (var error in validationResult.Errors)
+                {
+                    validationrResultsStringBuilder.Append($"{error.Code}: {error.Description}\n");
+                }
                 outputEmbed = new DiscordEmbedBuilder
                 {
                     Color = DiscordColor.Red,
@@ -83,10 +89,10 @@ namespace ShoppingBot.Shared
                     Footer = new DiscordEmbedBuilder.EmbedFooter()
                     {
                         Text = $"Additional information: \n" +
-                        $"{result.Error.Code}: {result.Error.Description}"
+                        $"{validationrResultsStringBuilder}"
                     }
 
-                };
+                }.AddField(result.Error.Code, result.Error.Description, true); 
             }
             await ctx.EditResponseAsync(new DiscordWebhookBuilder().AddEmbed(outputEmbed));
         }
@@ -137,8 +143,8 @@ namespace ShoppingBot.Shared
                 var outputEmbed = new DiscordEmbedBuilder()
                 {
                     Color = DiscordColor.Green,
-                    Title = $"Prder operation response",
-                    Description = "Order list is empty"
+                    Title = $"{nameof(T)} operation response",
+                    Description = $"{nameof(T)} list is empty"
                 };
                 await ctx.EditResponseAsync(new DiscordWebhookBuilder()
                     .AddEmbed(outputEmbed));
@@ -156,6 +162,12 @@ namespace ShoppingBot.Shared
             var result = await _mediator.Send(command);
             if (result.IsFailure)
             {
+                IValidationResult validationResult = (IValidationResult)result;
+                StringBuilder validationrResultsStringBuilder = new StringBuilder();
+                foreach (var error in validationResult.Errors)
+                {
+                    validationrResultsStringBuilder.Append($"{error.Code}: {error.Description}\n");
+                }
                 outputEmbed = new DiscordEmbedBuilder
                 {
                     Color = DiscordColor.Red,
@@ -164,9 +176,9 @@ namespace ShoppingBot.Shared
                     Footer = new DiscordEmbedBuilder.EmbedFooter()
                     {
                         Text = $"Additional information: \n" +
-                        $"{result.Error.Code}: {result.Error.Description}"
+                        $"{validationrResultsStringBuilder}"
                     }
-                };
+                }.AddField(result.Error.Code, result.Error.Description, true);
             }
             else
             {
@@ -190,10 +202,10 @@ namespace ShoppingBot.Shared
             if (result.IsFailure)
             {
                 IValidationResult validationResult = (IValidationResult)result;
-                StringBuilder resultsStringBuilder = new StringBuilder();
+                StringBuilder validationrResultsStringBuilder = new StringBuilder();
                 foreach (var error in validationResult.Errors)
                 {
-                    resultsStringBuilder.Append($"{error.Code}: {error.Description}\n");
+                    validationrResultsStringBuilder.Append($"{error.Code}: {error.Description}\n");
                 }
                 outputEmbed = new DiscordEmbedBuilder
                 {
@@ -203,9 +215,9 @@ namespace ShoppingBot.Shared
                     Footer = new DiscordEmbedBuilder.EmbedFooter()
                     {
                         Text = "Additional information:\n" +
-                        $"{resultsStringBuilder}"
+                        $"{validationrResultsStringBuilder}"
                     }
-                };
+                }.AddField(result.Error.Code, result.Error.Description, true);
             }
             else
             {
@@ -227,6 +239,12 @@ namespace ShoppingBot.Shared
             var result = await _mediator.Send(command);
             if (result.IsFailure)
             {
+                IValidationResult validationResult = (IValidationResult)result;
+                StringBuilder validationrResultsStringBuilder = new StringBuilder();
+                foreach (var error in validationResult.Errors)
+                {
+                    validationrResultsStringBuilder.Append($"{error.Code}: {error.Description}\n");
+                }
                 outputEmbed = new DiscordEmbedBuilder
                 {
                     Color = DiscordColor.Red,
@@ -235,9 +253,9 @@ namespace ShoppingBot.Shared
                     Footer = new DiscordEmbedBuilder.EmbedFooter()
                     {
                         Text = $"Additional information: \n" +
-                        $"{result.Error.Code}: {result.Error.Description}"
+                        $"{validationrResultsStringBuilder}"
                     }
-                };
+                }.AddField(result.Error.Code, result.Error.Description, true);
             }
             else
             {
