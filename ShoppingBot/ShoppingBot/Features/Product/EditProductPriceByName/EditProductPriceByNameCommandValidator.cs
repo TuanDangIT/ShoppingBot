@@ -11,12 +11,7 @@ namespace ShoppingBot.Features.Product.EditProductPriceByName
     {
         public EditProductPriceByNameCommandValidator()
         {
-            RuleFor(x => x.Name)
-                .NotNull()
-                .NotEmpty();
             RuleFor(x => x.Price)
-                .NotNull()
-                .NotEmpty()
                 .GreaterThanOrEqualTo(0);
         }
     }

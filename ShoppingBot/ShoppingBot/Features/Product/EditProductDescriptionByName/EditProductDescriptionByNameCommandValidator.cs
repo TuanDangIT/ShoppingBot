@@ -12,12 +12,8 @@ namespace ShoppingBot.Features.Product.EditProductDescriptionByName
         public EditProductDescriptionByNameCommandValidator()
         {
             RuleFor(x => x.Name)
-                .NotNull()
-                .NotEmpty()
                 .MaximumLength(20);
             RuleFor(x => x.Description)
-                .NotNull()
-                .NotEmpty()
                 .MaximumLength(200);
         }
     }

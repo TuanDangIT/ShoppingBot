@@ -12,8 +12,6 @@ namespace ShoppingBot.Features.Product.EditProductImageUrlByName
         public EditProductImageUrlByNameCommandValidator()
         {
             RuleFor(x => x.Name)
-                .NotNull()
-                .NotEmpty()
                 .MaximumLength(20);
         }
     }
