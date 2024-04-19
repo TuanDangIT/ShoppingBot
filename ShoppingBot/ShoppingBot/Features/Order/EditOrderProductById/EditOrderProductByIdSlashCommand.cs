@@ -19,7 +19,6 @@ namespace ShoppingBot.Features.Order
         public async Task EditOrderProduct(InteractionContext ctx, [Option("name", "Item name")] string name
             , [Option("id", "Order id")] string id)
         {
-            Guid.TryParse(id, out var guidParsed);
             await   Edit<Entities.Order>(ctx, new EditOrderProductByIdCommand(id, name, ctx.Guild.Id.ToString()));
         }
     }

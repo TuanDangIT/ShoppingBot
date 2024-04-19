@@ -13,7 +13,6 @@ namespace ShoppingBot.Features.Order
         public async Task DeleteOrderById(InteractionContext ctx,
             [Option("id", "Order id")] string id)
         {
-            Guid.TryParse(id, out var guidParsed);
             await Delete<Entities.Order>(ctx, new DeleteOrderByIdCommand(id, ctx.Guild.Id.ToString()));
         }
     }
