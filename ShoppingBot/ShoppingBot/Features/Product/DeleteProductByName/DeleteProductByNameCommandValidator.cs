@@ -12,7 +12,7 @@ namespace ShoppingBot.Features.Product.DeleteProductByName
         public DeleteProductByNameCommandValidator()
         {
             RuleFor(x => x.Name)
-                .MaximumLength(50);
+                .MaximumLength(20);
         }
     }
 }

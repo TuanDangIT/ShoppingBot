@@ -22,7 +22,7 @@ namespace ShoppingBot.Features.Product.AddProduct
                     }
                 });
             RuleFor(x => x.Description)
-                .MaximumLength(200);
+                .MaximumLength(100);
             RuleFor(x => x.Price)
                 .GreaterThanOrEqualTo(0);
         }

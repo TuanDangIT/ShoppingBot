@@ -14,7 +14,7 @@ namespace ShoppingBot.Features.Product.EditProductDescriptionByName
             RuleFor(x => x.Name)
                 .MaximumLength(20);
             RuleFor(x => x.Description)
-                .MaximumLength(200);
+                .MaximumLength(100);
         }
     }
 }

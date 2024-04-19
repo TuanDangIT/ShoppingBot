@@ -11,6 +11,8 @@ namespace ShoppingBot.Features.Product.EditProductPriceByName
     {
         public EditProductPriceByNameCommandValidator()
         {
+            RuleFor(x => x.Name)
+                .MaximumLength(20);
             RuleFor(x => x.Price)
                 .GreaterThanOrEqualTo(0);
         }
