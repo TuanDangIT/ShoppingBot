@@ -29,7 +29,6 @@ namespace ShoppingBot
             {
                 options.UseNpgsql(configuration.GetConnectionString("Postgres"));
                 options.AddInterceptors(new UpdateAuditableInterceptor());
-                //options.UseSqlServer(configuration.GetConnectionString("MSSQL")); 
             });
             services.AddSingleton<ShoppingBot>();
             services.AddMediatR(cfg =>
