@@ -46,6 +46,7 @@ namespace ShoppingBot
                 .AsImplementedInterfaces()
                 .WithScopedLifetime();
             });
+            ValidatorOptions.Global.LanguageManager.Enabled = false;
             services.AddScoped<IProductRepository, ProductRepository>();
             services.AddScoped<IOrderRepository, OrderRepository>();
             services.AddHostedService<BotDisconnectHandler>();
