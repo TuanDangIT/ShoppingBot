@@ -45,10 +45,10 @@ namespace ShoppingBot.Shared
                         Color = DiscordColor.Green,
                         Title = $"{productDto.Name}",
                         Description = $"{productDto.Description}",
-                        Footer = new DiscordEmbedBuilder.EmbedFooter()
-                        {
-                            Text = $"Last updated : {productDto.LastUpdatedAt} (UTC +02:00), Created at: {productDto.CreatedAt} (UTC +02:00)"
-                        }
+                        //Footer = new DiscordEmbedBuilder.EmbedFooter()
+                        //{
+                        //    Text = $"Last updated : {productDto.LastUpdatedAt} (UTC +02:00), Created at: {productDto.CreatedAt} (UTC +02:00)"
+                        //}
                     }.AddField(nameof(productDto.Price), productDto.Price.ToString("F"), true);
 
                     if (productDto.ImageUrl != null && productDto.ImageUrl.Contains("https"))
