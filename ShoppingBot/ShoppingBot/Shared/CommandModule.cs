@@ -152,6 +152,7 @@ namespace ShoppingBot.Shared
             else
             {
                 await ctx.Channel.SendPaginatedMessageAsync(ctx.Member, pageList);
+                await ctx.EditResponseAsync(new DiscordWebhookBuilder());
             }
         }
         public async Task Delete<T>(InteractionContext ctx, ICommand command)

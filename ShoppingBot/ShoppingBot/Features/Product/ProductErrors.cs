@@ -1,10 +1,11 @@
-﻿using System;
+﻿using ShoppingBot.Shared;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ShoppingBot.Shared.Errors
+namespace ShoppingBot.Features.Product
 {
     internal static class ProductErrors
     {

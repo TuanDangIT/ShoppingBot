@@ -2,7 +2,6 @@
 using ShoppingBot.DAL.Repositories;
 using ShoppingBot.DAL.Repositories.Interfaces;
 using ShoppingBot.DTOs;
-using ShoppingBot.Shared.Errors;
 using ShoppingBot.Shared;
 using System;
 using System.Collections.Generic;
@@ -10,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ShoppingBot.Shared.Abstractions;
+using ShoppingBot.Shared.Errors;
 
 namespace ShoppingBot.Features.Order.GetOrderById
 {
@@ -24,7 +24,7 @@ namespace ShoppingBot.Features.Order.GetOrderById
 
         public async Task<Result<OrderDto>> Handle(GetOrderByIdQuery request, CancellationToken cancellationToken)
         {
-            if(Guid.TryParse(request.GuidId, out var guidParsed))
+            if(!Guid.TryParse(request.GuidId, out var guidParsed))
             {
                 return Result.Failure<OrderDto>(OrderErrors.NotGuidFormat);
             }
