@@ -75,24 +75,42 @@ namespace ShoppingBot.Shared
             }
             else
             {
-                IValidationResult validationResult = (IValidationResult)result;
-                StringBuilder validationrResultsStringBuilder = new StringBuilder();
-                foreach (var error in validationResult.Errors)
+                if(result is IValidationResult validationResult)
                 {
-                    validationrResultsStringBuilder.Append($"{error.Code}: {error.Description}\n");
-                }
-                outputEmbed = new DiscordEmbedBuilder
-                {
-                    Color = DiscordColor.Red,
-                    Title = $"{nameof(T)} operation response",
-                    Description = $"{nameof(T)} get operation failed",
-                    Footer = new DiscordEmbedBuilder.EmbedFooter()
+                    StringBuilder validationrResultsStringBuilder = new StringBuilder();
+                    foreach (var error in validationResult.Errors)
                     {
-                        Text = $"Additional information: \n" +
-                        $"{validationrResultsStringBuilder}"
+                        validationrResultsStringBuilder.Append($"{error.Code}: {error.Description}\n");
                     }
+                    outputEmbed = new DiscordEmbedBuilder
+                    {
+                        Color = DiscordColor.Red,
+                        Title = $"{nameof(T)} operation response",
+                        Description = $"{nameof(T)} get operation failed",
+                        Footer = new DiscordEmbedBuilder.EmbedFooter()
+                        {
+                            Text = $"Additional information: \n" +
+                            $"{validationrResultsStringBuilder}"
+                        }
 
-                }.AddField(result.Error.Code, result.Error.Description, true); 
+                    }.AddField(result.Error.Code, result.Error.Description, true);
+                }
+                else
+                {
+                    outputEmbed = new DiscordEmbedBuilder
+                    {
+                        Color = DiscordColor.Red,
+                        Title = $"{nameof(T)} operation response",
+                        Description = $"{nameof(T)} get operation failed",
+                        //Footer = new DiscordEmbedBuilder.EmbedFooter()
+                        //{
+                        //    Text = $"Additional information: \n" +
+                        //    $"{validationrResultsStringBuilder}"
+                        //}
+
+                    }.AddField(result.Error.Code, result.Error.Description, true);
+                }
+                
             }
             await ctx.EditResponseAsync(new DiscordWebhookBuilder().AddEmbed(outputEmbed));
         }
@@ -202,23 +220,40 @@ namespace ShoppingBot.Shared
             var outputEmbed = new DiscordEmbedBuilder();
             if (result.IsFailure)
             {
-                IValidationResult validationResult = (IValidationResult)result;
-                StringBuilder validationrResultsStringBuilder = new StringBuilder();
-                foreach (var error in validationResult.Errors)
+                if(result is IValidationResult validationResult)
                 {
-                    validationrResultsStringBuilder.Append($"{error.Code}: {error.Description}\n");
-                }
-                outputEmbed = new DiscordEmbedBuilder
-                {
-                    Color = DiscordColor.Red,
-                    Title = $"{nameof(T)} operation response",
-                    Description = $"{nameof(T)} operation failed!",
-                    Footer = new DiscordEmbedBuilder.EmbedFooter()
+                    StringBuilder validationrResultsStringBuilder = new StringBuilder();
+                    foreach (var error in validationResult.Errors)
                     {
-                        Text = "Additional information:\n" +
-                        $"{validationrResultsStringBuilder}"
+                        validationrResultsStringBuilder.Append($"{error.Code}: {error.Description}\n");
                     }
-                }.AddField(result.Error.Code, result.Error.Description, true);
+                    outputEmbed = new DiscordEmbedBuilder
+                    {
+                        Color = DiscordColor.Red,
+                        Title = $"{nameof(T)} operation response",
+                        Description = $"{nameof(T)} operation failed!",
+                        Footer = new DiscordEmbedBuilder.EmbedFooter()
+                        {
+                            Text = "Additional information:\n" +
+                            $"{validationrResultsStringBuilder}"
+                        }
+                    }.AddField(result.Error.Code, result.Error.Description, true);
+                }
+                else
+                {
+                    outputEmbed = new DiscordEmbedBuilder
+                    {
+                        Color = DiscordColor.Red,
+                        Title = $"{nameof(T)} operation response",
+                        Description = $"{nameof(T)} operation failed!",
+                        //Footer = new DiscordEmbedBuilder.EmbedFooter()
+                        //{
+                        //    Text = "Additional information:\n" +
+                        //    $"{validationrResultsStringBuilder}"
+                        //}
+                    }.AddField(result.Error.Code, result.Error.Description, true);
+                }
+                
             }
             else
             {
