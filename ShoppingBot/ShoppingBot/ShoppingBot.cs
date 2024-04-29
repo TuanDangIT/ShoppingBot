@@ -16,6 +16,7 @@ using DSharpPlus.Entities;
 using MediatR;
 using ShoppingBot.Features.Order;
 using DSharpPlus.SlashCommands.Attributes;
+using ShoppingBot.Features.Template;
 
 namespace ShoppingBot
 {
@@ -100,6 +101,7 @@ namespace ShoppingBot
             //slashCommands.RegisterCommands<TestSlashCommands>();
             slashCommands.RegisterCommands<OrderSlashCommands>();
             slashCommands.RegisterCommands<ProductSlashCommands>();
+            slashCommands.RegisterCommands<TemplateSlashCommands>();
             
         }
 
