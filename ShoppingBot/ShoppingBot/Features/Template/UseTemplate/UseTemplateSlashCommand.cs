@@ -19,8 +19,14 @@ namespace ShoppingBot.Features.Template
             await ctx.DeferAsync();
             try
             {
-                var category = await ctx.Guild.CreateChannelCategoryAsync("Akcje administratora");
-                await ctx.Guild.CreateChannelAsync("Komendy administratora", DSharpPlus.ChannelType.Text, category);
+                await ctx.Guild.DeleteAllChannelsAsync();
+                var administrationSection = await ctx.Guild.CreateChannelCategoryAsync("Administration section");
+                var generalSection = await ctx.Guild.CreateChannelCategoryAsync("General section");
+                var clientSection = await ctx.Guild.CreateChannelCategoryAsync("Client section");
+                var ticketSection = await ctx.Guild.CreateChannelCategoryAsync("Ticket section");  
+                var administrationTextChannel = await ctx.Guild.CreateChannelAsync("Administration commands", DSharpPlus.ChannelType.Text, administrationSection);
+                var administrationRoom = await ctx.Guild.CreateChannelAsync("Administration room", DSharpPlus.ChannelType.Voice, administrationSection);
+                var general = await ctx.Guild.CreateChannelAsync("Administration commands", DSharpPlus.ChannelType.Text, generalSection);
                 var outputEmbed = new DiscordEmbedBuilder
                 {
                     Color = DiscordColor.Green,
