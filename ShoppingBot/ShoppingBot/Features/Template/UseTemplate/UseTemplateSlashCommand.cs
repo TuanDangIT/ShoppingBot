@@ -14,7 +14,7 @@ namespace ShoppingBot.Features.Template
     internal partial class TemplateSlashCommands
     {
         [SlashCommand("use-template", "Use template on the server")]
-        public async Task UseTemplate(InteractionContext ctx, [Option("template-name", "Template's name")] string name)
+        public async Task UseTemplate(InteractionContext ctx)
         {
             await ctx.DeferAsync();
             try
