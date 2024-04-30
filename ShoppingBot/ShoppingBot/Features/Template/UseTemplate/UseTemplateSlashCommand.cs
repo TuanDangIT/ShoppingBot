@@ -13,7 +13,7 @@ namespace ShoppingBot.Features.Template
 {
     internal partial class TemplateSlashCommands
     {
-        [SlashCommand("use-template", "Use template on the server")]
+        [SlashCommand("use-ecommerce-template", "Use prepered template for e-commerce")]
         public async Task UseTemplate(InteractionContext ctx)
         {
             await ctx.DeferAsync();
