@@ -34,5 +34,10 @@
 	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	  </None>
 	</ItemGroup>
+	<ItemGroup>
+	  <Folder Include="Features\User\BuyProduct\" />
+	  <Folder Include="Features\User\DeleteUser\" />
+	  <Folder Include="Features\User\GetUser\" />
+	</ItemGroup>
 
 </Project>
