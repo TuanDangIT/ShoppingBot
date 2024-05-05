@@ -6,7 +6,5 @@ using System.Threading.Tasks;
 
 namespace ShoppingBot.Features.User.CreateUser
 {
-    internal class CreateUserCommand
-    {
-    }
+    internal record class CreateUserCommand(string Username);
 }
