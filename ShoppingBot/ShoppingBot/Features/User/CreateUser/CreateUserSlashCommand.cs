@@ -17,7 +17,7 @@ namespace ShoppingBot.Features.User
             await ctx.DeferAsync();
             var result = await _mediator.Send(new CreateUserCommand(ctx.User.Username));
             DiscordEmbedBuilder outputEmbed;
-            if (result.IsFailure)
+            if (!result.IsFailure)
             {
                 outputEmbed = new DiscordEmbedBuilder()
                 {
