@@ -34,6 +34,11 @@ namespace ShoppingBot.Features.User
                     Color = DiscordColor.Red,
                     Title = $"User operation reponse",
                     Description = $"User delete operation failed",
+                    Footer = new DiscordEmbedBuilder.EmbedFooter()
+                    {
+                        Text = $"Additional information: \n" +
+                        $"{result.Error.Code}: {result.Error.Description}"
+                    }
                 };
             }
             await ctx.EditResponseAsync(new DiscordWebhookBuilder()
@@ -61,6 +66,11 @@ namespace ShoppingBot.Features.User
                     Color = DiscordColor.Red,
                     Title = $"User operation reponse",
                     Description = $"User delete operation failed",
+                    Footer = new DiscordEmbedBuilder.EmbedFooter()
+                    {
+                        Text = $"Additional information: \n" +
+                        $"{result.Error.Code}: {result.Error.Description}"
+                    }
                 };
             }
             await ctx.EditResponseAsync(new DiscordWebhookBuilder()
