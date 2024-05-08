@@ -12,7 +12,7 @@ namespace ShoppingBot.Features.User
 {
     internal partial class UserSlashCommands
     {
-        [SlashCommand("register-user", "Register yourself to conduct any operations")]
+        [SlashCommand("delete-user", "Delete yourself")]
         public async Task DeleteUser(InteractionContext ctx)
         {
             await ctx.DeferAsync();

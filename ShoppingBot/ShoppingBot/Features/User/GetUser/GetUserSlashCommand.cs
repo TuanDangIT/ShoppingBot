@@ -13,7 +13,7 @@ namespace ShoppingBot.Features.User
     {
         [SlashCommand("get-user", "Get user information")]
         public async Task GetUser(InteractionContext ctx,
-            [Option("username", "User's username")]string username)
+            [Option("username", "User's username")] string username)
         {
             await ctx.DeferAsync();
             var result = await _mediator.Send(new GetUserQuery(username));

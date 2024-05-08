@@ -19,7 +19,12 @@ namespace ShoppingBot.Features.User.DeleteUser
         }
         public async Task<Result> Handle(DeleteUserCommand request, CancellationToken cancellationToken)
         {
-            var change = await _userRepository.DeleteUser(request.Username);
+            var user = await _userRepository.GetUser(request.Username);
+            if(user is null)
+            {
+                return Result.Failure(UserErrors.NotFound);
+            }
+            var change = await _userRepository.DeleteUser(user);
             if(change == 0)
             {
                 return Result.Failure(UserErrors.NotDeleted);

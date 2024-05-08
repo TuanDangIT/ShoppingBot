@@ -10,7 +10,7 @@ namespace ShoppingBot.DAL.Repositories.Interfaces
     internal interface IUserRepository
     {
         Task<int> CreateUser(User user);
-        Task<int> DeleteUser(string username);
+        Task<int> DeleteUser(User user);
         Task<User?> GetUser(string username);
     }
 }

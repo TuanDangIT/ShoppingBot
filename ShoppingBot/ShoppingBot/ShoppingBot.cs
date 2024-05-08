@@ -102,7 +102,7 @@ namespace ShoppingBot
             //slashCommands.RegisterCommands<TestSlashCommands>();
             slashCommands.RegisterCommands<OrderSlashCommands>();
             slashCommands.RegisterCommands<ProductSlashCommands>();
-            slashCommands.RegisterCommands<TemplateSlashCommands>();
+            //slashCommands.RegisterCommands<TemplateSlashCommands>();
             slashCommands.RegisterCommands<UserSlashCommands>();
             
         }

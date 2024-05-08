@@ -26,14 +26,9 @@ namespace ShoppingBot.DAL.Repositories
             return change;
         }
 
-        public async Task<int> DeleteUser(string username)
+        public async Task<int> DeleteUser(User user)
         {
-            var user = new User()
-            {
-                Username = username,
-            };
-            var entry = _dbContext.Attach(user);
-            entry.State = Microsoft.EntityFrameworkCore.EntityState.Deleted;
+            _dbContext.Users.Remove(user);
             var change = await _dbContext.SaveChangesAsync();
             return change;
         }

@@ -48,6 +48,7 @@ namespace ShoppingBot
             ValidatorOptions.Global.LanguageManager.Enabled = false;
             services.AddScoped<IProductRepository, ProductRepository>();
             services.AddScoped<IOrderRepository, OrderRepository>();
+            services.AddScoped<IUserRepository, UserRepository>();
             services.AddHostedService<BotDisconnectHandler>();
             services.AddHostedService<DatabaseInitializer>();
             return services;
