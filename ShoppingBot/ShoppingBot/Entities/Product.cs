@@ -11,6 +11,7 @@ namespace ShoppingBot.Entities
     {
         public Guid Id { get; set; }
         public string Name { get; set; } = default!;
+        public int? Quantity { get; set; }
         public double Price { get; set; }
         public string Description { get; set; } = default!;
         public string? ImageUrl { get; set; }

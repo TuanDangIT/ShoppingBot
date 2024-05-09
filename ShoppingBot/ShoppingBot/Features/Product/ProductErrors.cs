@@ -14,5 +14,6 @@ namespace ShoppingBot.Features.Product
         public static readonly Error NotCreated = new Error("product-not-created", "Product not created");
         public static readonly Error NotDeleted = new Error("product-not-deleted", "Product not deleted");
         public static readonly Error NotUpdated = new Error("product-not-found", "Product not updated");
+        public static readonly Error OutOfStock = new Error("product-out-of-stock", "Product is out of stock");
     }
 }

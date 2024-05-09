@@ -29,6 +29,10 @@ namespace ShoppingBot.Features.Order.CreateOrder
             {
                 return Result.Failure(ProductErrors.NotFound);
             }
+            if(product.Quantity != null && product.Quantity == 0)
+            {
+                return Result.Failure(ProductErrors.OutOfStock);
+            }
             var change = await _orderRepository.CreateOrderAsync(new Entities.Order()
             {
                 Id = Guid.NewGuid(),
