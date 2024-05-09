@@ -14,7 +14,7 @@ namespace ShoppingBot.Entities
         public double Price { get; set; }
         public string Description { get; set; } = default!;
         public string? ImageUrl { get; set; }
-        public List<Order> Orders { get; } = new List<Order>();
+        public List<Order> Orders { get; set; } = new List<Order>();
         public string ServerId { get; set; } = default!;
         public DateTime CreatedAt { get; set; }
         public DateTime LastUpdatedAt { get; set; }

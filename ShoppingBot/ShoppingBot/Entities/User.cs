@@ -10,5 +10,6 @@ namespace ShoppingBot.Entities
     {
         public Guid Id { get; set; }
         public string Username { get; set; } = default!;
+        public List<User> Users { get; set; } = new();
     }
 }
