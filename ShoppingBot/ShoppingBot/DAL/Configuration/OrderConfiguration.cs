@@ -13,8 +13,9 @@ namespace ShoppingBot.DAL.Configuration
     {
         public void Configure(EntityTypeBuilder<Order> builder)
         {
-            builder.Property(x => x.Buyer)
-                .IsRequired();
+            builder.HasOne(x => x.User)
+                .WithMany(x => x.Orders)
+                .HasForeignKey(x => x.UserId);
             builder.HasOne(x => x.Product)
                 .WithMany(x => x.Orders)
                 .HasForeignKey(x => x.ProductId);

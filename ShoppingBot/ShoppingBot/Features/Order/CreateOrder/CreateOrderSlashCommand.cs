@@ -19,9 +19,10 @@ namespace ShoppingBot.Features.Order
         [SlashCommand("create-order", "Create an order")]
         [SlashRequirePermissions(DSharpPlus.Permissions.Administrator)]
         public async Task CreateOrder(InteractionContext ctx,
-            [Option("product-name", "Product name for an order")] string productName)
+            [Option("product-name", "Product name for an order")] string productName,
+            [Option("client-username", "Client username")] string username)
         {
-            await Create<Entities.Order>(ctx, new CreateOrderCommand(ctx.User.Username, productName, ctx.Guild.Id.ToString()));
+            await Create<Entities.Order>(ctx, new CreateOrderCommand(username, productName, ctx.Guild.Id.ToString()));
         }
     }
 }

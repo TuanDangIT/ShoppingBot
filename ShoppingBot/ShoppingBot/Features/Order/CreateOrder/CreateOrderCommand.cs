@@ -9,5 +9,5 @@ using System.Windows.Input;
 
 namespace ShoppingBot.Features.Order.CreateOrder
 {
-    internal record class CreateOrderCommand(string Buyer, string ProductName, string ServerId) : Shared.Abstractions.ICommand;
+    internal record class CreateOrderCommand(string Username, string ProductName, string ServerId) : Shared.Abstractions.ICommand;
 }

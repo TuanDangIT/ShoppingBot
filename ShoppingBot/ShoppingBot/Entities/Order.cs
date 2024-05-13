@@ -10,7 +10,8 @@ namespace ShoppingBot.Entities
     public class Order : IAuditable
     {
         public Guid Id { get; set; }
-        public string Buyer { get; set; } = default!;
+        public virtual User User { get; set; } = default!;
+        public Guid UserId { get; set; } = default!;
         public virtual Product Product { get; set; } = default!;
         public Guid ProductId { get; set; }
         public string ServerId { get; set; } = default!;

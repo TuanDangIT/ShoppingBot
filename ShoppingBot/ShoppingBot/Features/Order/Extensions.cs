@@ -14,7 +14,6 @@ namespace ShoppingBot.Features.Order
             return new OrderDto()
             {
                 Id = order.Id,
-                Buyer = order.Buyer,
                 Product = order.Product,
                 CreatedAt = order.CreatedAt,
                 LastUpdatedAt = order.LastUpdatedAt,
