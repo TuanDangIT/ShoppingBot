@@ -24,5 +24,11 @@ namespace ShoppingBot.Features.Order
         {
             await Create<Entities.Order>(ctx, new CreateOrderCommand(username, productName, ctx.Guild.Id.ToString()));
         }
+        [SlashCommand("buy-product", "Buy a product")]
+        public async Task BuyProduct(InteractionContext ctx,
+            [Option("product-name", "Product name for an order")] string productName)
+        {
+            await Create<Entities.Order>(ctx, new CreateOrderCommand(ctx.User.Username, productName, ctx.Guild.Id.ToString()));
+        }
     }
 }
