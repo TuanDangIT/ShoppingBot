@@ -5,6 +5,7 @@ using ShoppingBot.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -47,16 +48,24 @@ namespace ShoppingBot.DAL.Repositories
             return change;
         }
 
-        public async Task<IEnumerable<Order>> GetAllOrderAsync(int page, string serverId)
+        public async Task<IEnumerable<Order>> GetAllOrderAsync(int page, string serverId, params Expression<Func<Order, object>>[] includes)
         {
             int pageSize = 5;
-            var products = await _dbContext.Orders
-                .Include(x => x.Product)
-                .AsNoTracking()
+            var productsQueryable = _dbContext.Orders.AsQueryable();
+            if(includes is not null)
+            {
+                foreach(var include in includes)
+                {
+                    productsQueryable = productsQueryable.Include(include);
+                }
+            }
+            var products = await productsQueryable.AsNoTracking()
                 .Where(x => x.ServerId == serverId)
                 .ToListAsync();
+
             return products.Skip(pageSize * (page - 1))
                 .Take(pageSize).ToList();
+
         }
 
         public Task<Order?> GetOrderByIdAsync(Guid id, string serverId)
