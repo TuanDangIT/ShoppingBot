@@ -24,13 +24,15 @@ namespace ShoppingBot.Features.Order.GetAllOrders
 
         public async Task<Result<IEnumerable<OrderDto>>> Handle(GetAllOrdersQuery request, CancellationToken cancellationToken)
         {
-            var result = await _orderRepository.GetAllOrderAsync(request.Page, request.ServerId);
+            var result = request.Username is null ? 
+                await _orderRepository.GetAllOrderAsync(request.Page, request.ServerId, x => x.Product) :
+                (await _orderRepository.GetAllOrderAsync(request.Page, request.ServerId, x => x.Product, x => x.User)).Where(x => x.User.Username == request.Username);
             if (result.Count() == 0 || result is null)
             {
                 return Result.Failure<IEnumerable<OrderDto>>(OrderErrors.NotFound);
             }
 
-            return request.Username is null ? Result.Success(result.Select(x => x.AsDto())) : Result.Success(result.Where(x => x.User.Username == request.Username).Select(x => x.AsDto()));
+            return Result.Success(result.Select(x => x.AsDto()));
         }
     }
 }
