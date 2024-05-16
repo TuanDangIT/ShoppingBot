@@ -29,7 +29,8 @@ namespace ShoppingBot.Features.Order.GetAllOrders
             {
                 return Result.Failure<IEnumerable<OrderDto>>(OrderErrors.NotFound);
             }
-            return Result.Success(result.Select(x => x.AsDto()));
+
+            return request.Username is null ? Result.Success(result.Select(x => x.AsDto())) : Result.Success(result.Where(x => x.User.Username == request.Username).Select(x => x.AsDto()));
         }
     }
 }

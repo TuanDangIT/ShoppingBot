@@ -24,5 +24,10 @@ namespace ShoppingBot.Features.Order
         {
             await GetAll<OrderDto>(ctx, EntityCode.Order);
         }
+        [SlashCommand("get-all-orders", "Get all orders")]
+        public async Task GetAllOrdersPerUser(InteractionContext ctx)
+        {
+            
+        }
     }
 }

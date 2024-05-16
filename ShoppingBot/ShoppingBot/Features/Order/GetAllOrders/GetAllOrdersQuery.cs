@@ -9,5 +9,5 @@ using System.Threading.Tasks;
 
 namespace ShoppingBot.Features.Order.GetAllOrders
 {
-    internal record class GetAllOrdersQuery(int Page, string ServerId) : IQuery<IEnumerable<OrderDto>>;
+    internal record class GetAllOrdersQuery(int Page, string ServerId, string Username = default!) : IQuery<IEnumerable<OrderDto>>;
 }
