@@ -10,7 +10,7 @@ namespace ShoppingBot.DTOs
     internal class OrderDto
     {
         public Guid Id { get; set; }
-        public string Buyer { get; set; } = default!;
+        public string BuyerUsername { get; set; } = default!;
         public Product Product { get; set; } = default!;
         public DateTime CreatedAt { get; set; }
         public DateTime LastUpdatedAt { get; set; }

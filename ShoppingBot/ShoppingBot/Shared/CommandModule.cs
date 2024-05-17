@@ -141,7 +141,7 @@ namespace ShoppingBot.Shared
                 {
                     if(item is OrderDto orderDto)
                     {
-                        sb.Append($"{orderDto.Id}, {orderDto.Buyer}, {orderDto.Product.Name} \n");
+                        sb.Append($"{orderDto.Id}, {orderDto.BuyerUsername}, {orderDto.Product.Name} \n");
                     }else if(item is ProductDto productDto)
                     {
                         sb.Append($"{productDto.Name}, {productDto.Price} \n");
@@ -160,7 +160,7 @@ namespace ShoppingBot.Shared
             {
                 var outputEmbed = new DiscordEmbedBuilder()
                 {
-                    Color = DiscordColor.Green,
+                    Color = DiscordColor.Red,
                     Title = $"{nameof(T)} operation response",
                     Description = $"{nameof(T)} list is empty"
                 };

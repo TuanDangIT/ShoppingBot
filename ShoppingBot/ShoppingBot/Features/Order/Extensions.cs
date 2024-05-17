@@ -11,13 +11,18 @@ namespace ShoppingBot.Features.Order
     {
         public static OrderDto AsDto(this Entities.Order order)
         {
-            return new OrderDto()
+            var orderDto = new OrderDto()
             {
                 Id = order.Id,
                 Product = order.Product,
                 CreatedAt = order.CreatedAt,
                 LastUpdatedAt = order.LastUpdatedAt,
             };
+            if(order.User != null)
+            {
+                orderDto.BuyerUsername = order.User.Username;
+            }
+            return orderDto;
         }
     }
 }
