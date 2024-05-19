@@ -1,12 +1,6 @@
 ﻿using DSharpPlus.CommandsNext;
 using DSharpPlus;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Newtonsoft.Json;
-using Microsoft.Extensions.DependencyInjection;
 using DSharpPlus.SlashCommands;
 using Microsoft.Extensions.Hosting;
 using ShoppingBot.Features.Product;
@@ -16,7 +10,6 @@ using DSharpPlus.Entities;
 using MediatR;
 using ShoppingBot.Features.Order;
 using DSharpPlus.SlashCommands.Attributes;
-using ShoppingBot.Features.Template;
 using ShoppingBot.Features.User;
 
 namespace ShoppingBot
