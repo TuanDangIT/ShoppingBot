@@ -28,6 +28,7 @@ namespace ShoppingBot.Features.Product.AddProduct
                 Description = request.Description,
                 ImageUrl = request.ImageUrl,
                 ServerId = request.ServerId,
+                Quantity = request.Quantity,
             });
             if(changes is 0)
             {

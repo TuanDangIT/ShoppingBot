@@ -25,6 +25,8 @@ namespace ShoppingBot.Features.Product.AddProduct
                 .MaximumLength(100);
             RuleFor(x => x.Price)
                 .GreaterThanOrEqualTo(0);
+            RuleFor(x => x.Quantity)
+                .GreaterThan(0);
         }
     }
 }
