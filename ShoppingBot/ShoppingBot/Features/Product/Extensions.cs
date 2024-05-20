@@ -13,7 +13,7 @@ namespace ShoppingBot.Features.Product
     {
         public static ProductDto AsDto(this Entities.Product product)
         {
-            return new ProductDto()
+            var productDto =  new ProductDto()
             {
                 Name = product.Name,
                 Price = product.Price,
@@ -23,6 +23,11 @@ namespace ShoppingBot.Features.Product
                 LastUpdatedAt = product.LastUpdatedAt,
                 CreatedAt = product.CreatedAt,
             };
+            if(product.Quantity is not null)
+            {
+                productDto.Quantity = product.Quantity;
+            }
+            return productDto;
         }
     }
 }

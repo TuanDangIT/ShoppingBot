@@ -49,7 +49,9 @@ namespace ShoppingBot.Shared
                         //{
                         //    Text = $"Last updated : {productDto.LastUpdatedAt} (UTC +02:00), Created at: {productDto.CreatedAt} (UTC +02:00)"
                         //}
-                    }.AddField(nameof(productDto.Price), productDto.Price.ToString("F"), true);
+                    }
+                    .AddField(nameof(productDto.Price), productDto.Price.ToString("F"), true)
+                    .AddField(nameof(productDto.Quantity), productDto.Quantity.ToString(), true);
 
                     if (productDto.ImageUrl != null && productDto.ImageUrl.Contains("https"))
                     {
