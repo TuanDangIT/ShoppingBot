@@ -22,7 +22,11 @@ namespace ShoppingBot.DAL.Repositories
 
         public async Task<int> CreateOrderAsync(Order order)
         {
-            var product = await _dbContext.Products.FirstOrDefaultAsync(x => x.Id == order.ProductId);
+            var product = await _dbContext.Products.FirstAsync(x => x.Id == order.ProductId);
+            if(product.Quantity is not null)
+            {
+                product.Quantity--;
+            }
             await _dbContext.AddAsync(order);
             return await _dbContext.SaveChangesAsync();
         }
