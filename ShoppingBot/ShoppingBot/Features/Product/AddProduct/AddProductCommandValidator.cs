@@ -26,7 +26,7 @@ namespace ShoppingBot.Features.Product.AddProduct
             RuleFor(x => x.Price)
                 .GreaterThanOrEqualTo(0);
             RuleFor(x => x.Quantity)
-                .GreaterThan(0);
+                .GreaterThanOrEqualTo(0);
         }
     }
 }

@@ -18,9 +18,16 @@ namespace ShoppingBot.Features.Product
         [SlashCommand("add-product", "Add a product")]
         [SlashRequirePermissions(DSharpPlus.Permissions.Administrator)]
         public async Task AddProduct(InteractionContext ctx, [Option("name", "Item name")] string name,
-            [Option("price", "Item price")] double price, [Option("description", "Item description")] string description, [Option("image-url", "Url link to the image")] string imageUrl)
+            [Option("price", "Item price")] double price, [Option("description", "Item description")] string description, [Option("image-url", "Url link to the image")] string imageUrl, [Option("quantity", "Item quantity")]int quantity)
         {
-            await Create<Entities.Product>(ctx, new AddProductCommand(name, price, description, imageUrl, ctx.Guild.Id.ToString()));
+            if(quantity == 0)
+            {
+                await Create<Entities.Product>(ctx, new AddProductCommand(name, price, description, imageUrl, ctx.Guild.Id.ToString()));
+            }
+            else
+            {
+                await Create<Entities.Product>(ctx, new AddProductCommand(name, price, description, imageUrl, ctx.Guild.Id.ToString(), quantity));
+            }
         }
     }
 }
