@@ -25,7 +25,7 @@ namespace ShoppingBot.Features.Order.GetAllOrders
         public async Task<Result<IEnumerable<OrderDto>>> Handle(GetAllOrdersQuery request, CancellationToken cancellationToken)
         {
             var result = request.Username is null ? 
-                await _orderRepository.GetAllOrderAsync(request.Page, request.ServerId, x => x.Product) :
+                await _orderRepository.GetAllOrderAsync(request.Page, request.ServerId, x => x.Product, x => x.User) :
                 (await _orderRepository.GetAllOrderAsync(request.Page, request.ServerId, x => x.Product, x => x.User)).Where(x => x.User.Username == request.Username);
             if (result.Count() == 0 || result is null)
             {
