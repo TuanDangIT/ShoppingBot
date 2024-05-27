@@ -1,5 +1,6 @@
 ﻿using DSharpPlus.SlashCommands;
 using MediatR;
+using ShoppingBot.Shared;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,13 +10,7 @@ using System.Threading.Tasks;
 namespace ShoppingBot.Features.User
 {
     [SlashCommandGroup("user", "User operations")]
-    internal partial class UserSlashCommands : ApplicationCommandModule
+    internal partial class UserSlashCommands : CommandModule
     {
-        private readonly IMediator _mediator;
-
-        public UserSlashCommands(IMediator mediator)
-        {
-            _mediator = mediator;
-        }
     }
 }
