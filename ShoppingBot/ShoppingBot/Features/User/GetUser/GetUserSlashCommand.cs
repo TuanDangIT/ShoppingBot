@@ -16,7 +16,7 @@ namespace ShoppingBot.Features.User
             [Option("username", "User's username")] string username)
         {
             await ctx.DeferAsync();
-            var result = await _mediator.Send(new GetUserQuery(username));
+            var result = await _mediator.Send(new GetUserQuery(username, ctx.Guild.Id.ToString()));
             DiscordEmbedBuilder outputEmbed;
             if (!result.IsFailure)
             {

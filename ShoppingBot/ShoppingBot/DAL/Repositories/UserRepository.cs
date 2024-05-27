@@ -33,9 +33,11 @@ namespace ShoppingBot.DAL.Repositories
             return change;
         }
 
-        public async Task<User?> GetUser(string username)
+        public async Task<User?> GetUser(string username, string serverId)
         {
-            return await _dbContext.Users.FirstOrDefaultAsync(x => x.Username == username);
+            return await _dbContext.Users
+                .Where(x => x.ServerId == serverId)
+                .FirstOrDefaultAsync(x => x.Username == username);
         }
     }
 }

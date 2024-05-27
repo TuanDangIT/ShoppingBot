@@ -8,5 +8,5 @@ using System.Threading.Tasks;
 
 namespace ShoppingBot.Features.User.GetUser
 {
-    internal record class GetUserQuery(string Username) : Shared.Abstractions.IQuery<UserDto>;
+    internal record class GetUserQuery(string Username, string ServerId) : Shared.Abstractions.IQuery<UserDto>;
 }

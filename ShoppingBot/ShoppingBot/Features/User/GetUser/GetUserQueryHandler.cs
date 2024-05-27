@@ -22,7 +22,7 @@ namespace ShoppingBot.Features.User.GetUser
 
         public async Task<Result<UserDto>> Handle(GetUserQuery request, CancellationToken cancellationToken)
         {
-            var user = await _userRepository.GetUser(request.Username);
+            var user = await _userRepository.GetUser(request.Username, request.ServerId);
             if (user is null)
             {
                 return Result.Failure<UserDto>(UserErrors.NotFound);
