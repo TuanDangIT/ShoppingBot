@@ -48,7 +48,7 @@ namespace ShoppingBot.Features.User
         public async Task GetMe(InteractionContext ctx)
         {
             await ctx.DeferAsync();
-            var result = await _mediator.Send(new GetUserQuery(ctx.User.Username));
+            var result = await _mediator.Send(new GetUserQuery(ctx.User.Username, ctx.Guild.Id.ToString()));
             DiscordEmbedBuilder outputEmbed;
             if (!result.IsFailure)
             {
