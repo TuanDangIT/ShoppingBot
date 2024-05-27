@@ -8,5 +8,5 @@ using System.Windows.Input;
 
 namespace ShoppingBot.Features.User.CreateUser
 {
-    internal record class CreateUserCommand(string Username) : Shared.Abstractions.ICommand;
+    internal record class CreateUserCommand(string Username, string ServerId) : Shared.Abstractions.ICommand;
 }

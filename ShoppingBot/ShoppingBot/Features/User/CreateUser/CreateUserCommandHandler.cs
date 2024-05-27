@@ -23,6 +23,7 @@ namespace ShoppingBot.Features.User.CreateUser
             {
                 Id = Guid.NewGuid(),
                 Username = request.Username,
+                ServerId = request.ServerId,
             });
             if(change == 0)
             {
