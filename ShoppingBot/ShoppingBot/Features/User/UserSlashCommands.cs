@@ -12,5 +12,8 @@ namespace ShoppingBot.Features.User
     [SlashCommandGroup("user", "User operations")]
     internal partial class UserSlashCommands : CommandModule
     {
+        public UserSlashCommands(IMediator mediator) : base(mediator)
+        {
+        }
     }
 }
