@@ -14,7 +14,7 @@ namespace ShoppingBot.Features.User
         [SlashCommand("register-user", "Register yourself to conduct any operations")]
         public async Task CreateUser(InteractionContext ctx)
         {
-
+            await Create<Entities.User>(ctx, new CreateUserCommand(ctx.User.Username, ctx.Guild.Id.ToString()));
             //await ctx.DeferAsync();
             //var result = await _mediator.Send(new CreateUserCommand(ctx.User.Username));
             //DiscordEmbedBuilder outputEmbed;
