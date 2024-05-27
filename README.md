@@ -35,4 +35,4 @@
 </ul>
 <h2>Get started</h2>
 
-<p>TBA</p>
+<p>TBA SOON</p>
