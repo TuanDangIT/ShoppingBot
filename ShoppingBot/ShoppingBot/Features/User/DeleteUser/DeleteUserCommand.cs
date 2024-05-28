@@ -7,5 +7,5 @@ using System.Threading.Tasks;
 
 namespace ShoppingBot.Features.User.DeleteUser
 {
-    internal record class DeleteUserCommand(string Username) : Shared.Abstractions.ICommand;
+    internal record class DeleteUserCommand(string Username, string ServerId) : Shared.Abstractions.ICommand;
 }

@@ -37,7 +37,7 @@ namespace ShoppingBot.Features.Order.CreateOrder
             {
                 return Result.Failure(ProductErrors.OutOfStock);
             }
-            var user = await _userRepository.GetUser(request.Username);
+            var user = await _userRepository.GetUser(request.Username, request.ServerId);
             if(user is null)
             {
                 return Result.Failure(UserErrors.NotFound);
