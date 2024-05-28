@@ -12,6 +12,7 @@ using ShoppingBot.Features.Order.GetOrderById;
 using ShoppingBot.Features.Product.DeleteProductByName;
 using ShoppingBot.Features.Product.GetAllProducts;
 using ShoppingBot.Features.Product.GetProductByName;
+using ShoppingBot.Features.User.DTOs;
 using ShoppingBot.Shared.Abstractions;
 using ShoppingBot.Shared.Enums;
 using System;
@@ -69,6 +70,14 @@ namespace ShoppingBot.Shared
                             Text = $"Last updated : {orderDto.LastUpdatedAt} (UTC +02:00), Created at: {orderDto.CreatedAt} (UTC +02:00)"
                         }
                     }.AddField(nameof(orderDto.Product), orderDto.Product.Name, true);
+                }else if(result.Value is UserDto userDto)
+                {
+                    outputEmbed = new DiscordEmbedBuilder()
+                    {
+                        Color = DiscordColor.Green,
+                        Title = $"User operation reponse",
+                        Description = $"User: {userDto.Username}",
+                    };
                 }
                 else
                 {

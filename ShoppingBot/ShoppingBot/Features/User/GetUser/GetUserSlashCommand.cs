@@ -1,5 +1,6 @@
 ﻿using DSharpPlus.Entities;
 using DSharpPlus.SlashCommands;
+using ShoppingBot.Features.User.DTOs;
 using ShoppingBot.Features.User.GetUser;
 using System;
 using System.Collections.Generic;
@@ -47,34 +48,7 @@ namespace ShoppingBot.Features.User
         [SlashCommand("get-me", "Get my information")]
         public async Task GetMe(InteractionContext ctx)
         {
-            await ctx.DeferAsync();
-            var result = await _mediator.Send(new GetUserQuery(ctx.User.Username, ctx.Guild.Id.ToString()));
-            DiscordEmbedBuilder outputEmbed;
-            if (!result.IsFailure)
-            {
-                outputEmbed = new DiscordEmbedBuilder()
-                {
-                    Color = DiscordColor.Green,
-                    Title = $"User operation reponse",
-                    Description = $"User: {result.Value.Username}",
-                };
-            }
-            else
-            {
-                outputEmbed = new DiscordEmbedBuilder()
-                {
-                    Color = DiscordColor.Red,
-                    Title = $"User operation reponse",
-                    Description = $"User delete operation failed",
-                    Footer = new DiscordEmbedBuilder.EmbedFooter()
-                    {
-                        Text = $"Additional information: \n" +
-                        $"{result.Error.Code}: {result.Error.Description}"
-                    }
-                };
-            }
-            await ctx.EditResponseAsync(new DiscordWebhookBuilder()
-                .AddEmbed(outputEmbed));
+            await Get<UserDto>(ctx, new GetUserQuery(ctx.User.Username, ctx.Guild.Id.ToString()));
         }
     }
 }
